@@ -1,0 +1,61 @@
+.headerNavigator {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px 0 20px;
+    align-items: center;
+    height: 9vh;
+    border-bottom: 1px solid rgba(59, 59, 98, 0.52);
+}
+
+.headerNavigatorLeft {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.headerNavigatorRight {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.navLinks {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.navLinks a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    background: linear-gradient(#203bff, #203bff) 50% 100% no-repeat;
+    background-size: 0 3px;
+    transition: background 250ms ease 0s;
+    font-weight: bold;
+    color: black;
+    height: 100%;
+    padding: 0 20px 0 20px;
+}
+
+.navLinks a:hover {
+    background-size: 100% 5px;
+}
+
+
+.logo {
+    font-family: "Segoe UI Black";
+    display: block;
+    font-size: 26px;
+    font-weight: bold;
+    color: #203bff;
+}
+
+.searchBlock {
+    min-width: 10vh;
+}
