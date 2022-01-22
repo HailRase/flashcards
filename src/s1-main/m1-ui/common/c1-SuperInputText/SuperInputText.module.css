@@ -1,0 +1,41 @@
+.superInput {
+    border: 2px solid #575252;
+    background: #ffffff;
+    border-radius: 3px 3px 3px 3px;
+    width: 300px;
+    height: 25px;
+    font-size: 16px;
+    padding-left: 5px;
+    margin-bottom: 10px;
+}
+
+.superInput:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #bdbdbd;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(62, 57, 57, 0.25);
+}
+
+.errorInput {
+    border: 2px solid #ff0000;
+    background: #ffffff;
+    border-radius: 3px 3px 3px 3px;
+    width: 300px;
+    height: 25px;
+    font-size: 16px;
+    padding-left: 5px;
+    margin-bottom: 10px;
+}
+.errorInput:focus {
+    border: 2px solid rgba(255, 0, 0, 0.11);
+    color: #212529;
+    background-color: #fff;
+    border-color: #ff0000;
+    outline: 0;
+
+}
+
+.error {
+    color: red;
+}
