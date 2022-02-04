@@ -10,7 +10,10 @@ const Login = () => {
             <div><SuperInputText/></div>
             <div><SuperInputText/></div>
             <div><SuperCheckbox/>Remember me</div>
-            <div><SuperButton/>Enter</div>
+            <div><SuperButton
+                placeholder={"Enter"}
+            />Enter
+            </div>
         </div>
     );
 };
