@@ -2,8 +2,8 @@ import React from 'react';
 import s from './Header.module.css'
 import {NavLink} from "react-router-dom";
 import {PATH} from "../routes/routes";
-import SuperInputText from '../common/c1-SuperInputText/SuperInputText';
-import SuperButton from "../common/c2-SuperButton/SuperButton";
+// import SuperInputText from '../common/c1-SuperInputText/SuperInputText';
+// import SuperButton from "../common/c2-SuperButton/SuperButton";
 //1
 const Header = () => {
     return (
@@ -17,11 +17,11 @@ const Header = () => {
                 </nav>
             </div>
             <div className={s.headerNavigatorRight}>
-                <div className={s.searchBlock}>
-                    <SuperInputText type={"search"} style={{width: '50%', height: '80%'}}
-                                    placeholder={'Enter request...'}/>
-                    <SuperButton>Search</SuperButton>
-                </div>
+                {/*<div className={s.searchBlock}>*/}
+                {/*    <SuperInputText type={"search"} style={{width: '50%', height: '80%'}}*/}
+                {/*                    placeholder={'Enter request...'}/>*/}
+                {/*    <SuperButton>Search</SuperButton>*/}
+                {/*</div>*/}
                 <nav className={s.navLinks}>
                     <NavLink to={PATH.AUTH.LOGIN} className={s.navLink}>Login</NavLink>
                     <NavLink to={PATH.AUTH.REGISTER} className={s.navLink}>Register</NavLink>
