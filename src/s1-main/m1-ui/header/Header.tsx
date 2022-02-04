@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 import {PATH} from "../routes/routes";
 import SuperInputText from '../common/c1-SuperInputText/SuperInputText';
 import SuperButton from "../common/c2-SuperButton/SuperButton";
-
+//1
 const Header = () => {
     return (
         <div className={s.headerNavigator}>
