@@ -16,5 +16,12 @@ export const authAPI = {
     },
     me(id: string, email: string, name: string, avatar?: string) {
         return instance.get(`auth/me`)
+    },
+    
+}
+
+export const PasswordAPI = {
+    changePassword(password: string, resetPasswordToken: string) {
+        return instance.post(`auth/set-new-password`, {password, resetPasswordToken})
     }
 }
