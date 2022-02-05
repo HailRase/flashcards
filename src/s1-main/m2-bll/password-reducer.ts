@@ -15,10 +15,16 @@ type SetResetPasswordStatusAction = ReturnType<typeof setResetPasswordStatus>;
 
 // THUNKS
 export const changePassword = (password: string, token: string) => {
-    return async (dispatch: Dispatch<SetResetPasswordStatusAction>) => {
-        const res = await PasswordAPI.changePassword(password, token);
-        const action = res.data.info ? setResetPasswordStatus("success") : setResetPasswordStatus("error")
-        dispatch(action);
+
+    return (dispatch: Dispatch<SetResetPasswordStatusAction>) => {
+        let action: SetResetPasswordStatusAction;
+        PasswordAPI.changePassword(password, token).then(res => {
+            action = setResetPasswordStatus("success")
+        }).catch(err => {
+            action = setResetPasswordStatus("error");
+        }).finally(() => {
+            dispatch(action);
+        })
     }
 }
 
