@@ -27,12 +27,12 @@ const PasswordRecovery = () => {
                 <span>Enter your email address and we will send you further instructions</span>
             </div>
             <div>
-                <SuperButton>Send instructions</SuperButton>
+                <SuperButton onClick={sendRegistrationDataHandler}>Send instructions</SuperButton>
             </div>
             <div>
                 <span>Did you remember your password?</span>
                 <br/>
-                <SuperButton onClick={sendRegistrationDataHandler}>Try logginin in</SuperButton>
+                <SuperButton>Try logginin in</SuperButton>
             </div>
         </div>
     );
