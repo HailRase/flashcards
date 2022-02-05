@@ -1,0 +1,15 @@
+.loginFormWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loginFormContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    border-radius: 5px;
+    width: 50vh;
+    border: 1px solid rgba(59, 59, 98, 0.52);
+}
