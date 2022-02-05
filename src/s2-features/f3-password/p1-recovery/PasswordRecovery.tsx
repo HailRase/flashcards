@@ -3,7 +3,16 @@ import React from 'react';
 const PasswordRecovery = () => {
     return (
         <div>
-            <h1>PASSWORD RECOVERY PAGE!</h1>
+            <span>Forgot your password?</span>
+            <div>
+                <input></input>
+            </div>
+            <div>
+                <button>Send instructions</button>
+            </div>
+            <div>
+                <button>Try logginin in</button>
+            </div>
         </div>
     );
 };
