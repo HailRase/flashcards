@@ -5,6 +5,8 @@ import SuperButton from "../../../s1-main/m1-ui/common/c2-SuperButton/SuperButto
 import {useDispatch} from "react-redux";
 import {loginData} from "../../../s1-main/m2-bll/auth-reducer";
 import SuperCheckbox from "../../../s1-main/m1-ui/common/c3-SuperCheckbox/SuperCheckbox";
+import PasswordRecovery from "../../f3-password/p1-recovery/PasswordRecovery";
+import {useNavigate} from "react-router-dom";
 
 const Login = () => {
     const [email, setEmail] = useState<string>("")
@@ -22,10 +24,15 @@ const Login = () => {
     }
     const onClickChangeStatus = () => {
         setStatus(true);
-
+    }
+    let navigate = useNavigate()
+    const onClickForgotPassword = () => {
+        let path = `/recovery`
+        navigate(path)
     }
     return (
         <div className={s.loginFormWrapper}>
+
             <div className={s.loginFormContainer}>
                 <h2>Login</h2>
                 <div>
@@ -43,6 +50,7 @@ const Login = () => {
                 <div>
                     <SuperButton onClick={onClickSendLogin}>Enter</SuperButton>
                 </div>
+                <div><SuperButton onClick={onClickForgotPassword}>Forgot your password</SuperButton></div>
             </div>
         </div>
     );
