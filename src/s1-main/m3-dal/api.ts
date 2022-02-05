@@ -23,5 +23,12 @@ export const authAPI = {
 export const PasswordAPI = {
     changePassword(password: string, resetPasswordToken: string) {
         return instance.post(`auth/set-new-password`, {password, resetPasswordToken})
-    }
+    },
+    recoverPassword(email: string, from: string) {
+        const message = `<div style="background-color: lime; padding: 15px">
+            password recovery link: 
+            <a href='http://localhost:3000/flashcards#/set-new-password/$token$'>
+            link</a></div>` ;
+        return instance.post(`auth/forgot`, {email, from, message});
+    },
 }

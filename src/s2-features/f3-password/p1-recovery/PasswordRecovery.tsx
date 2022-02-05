@@ -1,17 +1,38 @@
-import React from 'react';
+import React, {useState, ChangeEvent} from 'react';
+import SuperInputText from "../../../s1-main/m1-ui/common/c1-SuperInputText/SuperInputText";
+import SuperButton from "../../../s1-main/m1-ui/common/c2-SuperButton/SuperButton";
+import {useDispatch} from "react-redux";
+import { recoveryPassword } from '../../../s1-main/m2-bll/password-reducer';
+
 
 const PasswordRecovery = () => {
+
+    const [email, setEmail] = useState<string>("");
+    const dispatch = useDispatch();
+
+    const onChangeEmailHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.currentTarget.value)
+    };
+
+    const sendRegistrationDataHandler = () => {
+        dispatch(recoveryPassword(email, "from: VadymHromyk"))
+    };
+
     return (
         <div>
             <span>Forgot your password?</span>
             <div>
-                <input></input>
+                <SuperInputText onChange={onChangeEmailHandler}></SuperInputText>
+                <br/>
+                <span>Enter your email address and we will send you further instructions</span>
             </div>
             <div>
-                <button>Send instructions</button>
+                <SuperButton>Send instructions</SuperButton>
             </div>
             <div>
-                <button>Try logginin in</button>
+                <span>Did you remember your password?</span>
+                <br/>
+                <SuperButton onClick={sendRegistrationDataHandler}>Try logginin in</SuperButton>
             </div>
         </div>
     );

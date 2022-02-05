@@ -2,9 +2,7 @@ import {Dispatch} from "redux";
 import {PasswordAPI} from "../m3-dal/api";
 
 // ACTIONS
-const setResetPasswordStatus = (
-    status: ResetPasswordStatus
-) => {
+const setResetPasswordStatus = (status: ResetPasswordStatus) => {
     return {
         type: "PASSWORD/SET_RESET_PASSWORD_STATUS",
         payload: status,
@@ -19,6 +17,20 @@ export const changePassword = (password: string, token: string) => {
     return (dispatch: Dispatch<SetResetPasswordStatusAction>) => {
         let action: SetResetPasswordStatusAction;
         PasswordAPI.changePassword(password, token).then(res => {
+            action = setResetPasswordStatus("success")
+        }).catch(err => {
+            action = setResetPasswordStatus("error");
+        }).finally(() => {
+            dispatch(action);
+        })
+    }
+}
+
+export const recoveryPassword = (email: string, from: string) => {
+
+    return (dispatch: Dispatch<SetResetPasswordStatusAction>) => {
+        let action: SetResetPasswordStatusAction;
+        PasswordAPI.recoverPassword(email, from).then(res => {
             action = setResetPasswordStatus("success")
         }).catch(err => {
             action = setResetPasswordStatus("error");
