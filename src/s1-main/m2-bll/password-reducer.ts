@@ -14,7 +14,7 @@ const setResetPasswordStatus = (
 type SetResetPasswordStatusAction = ReturnType<typeof setResetPasswordStatus>;
 
 // THUNKS
-const changePassword = (password: string, token: string) => {
+export const changePassword = (password: string, token: string) => {
     return async (dispatch: Dispatch<SetResetPasswordStatusAction>) => {
         const res = await PasswordAPI.changePassword(password, token);
         const action = res.data.info ? setResetPasswordStatus("success") : setResetPasswordStatus("error")
@@ -41,9 +41,9 @@ export const passwordReducer = (
 };
 
 // TYPES
-type ResetPasswordStatus = "init" | "success" | "error";
+export type ResetPasswordStatus = "init" | "success" | "error";
 
-type PasswordReducerType = {
+export type PasswordReducerType = {
     resetPasswordStatus: ResetPasswordStatus;
 };
 
