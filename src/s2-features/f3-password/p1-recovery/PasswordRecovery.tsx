@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import { recoveryPassword, ResetPasswordStatus } from '../../../s1-main/m2-bll/password-reducer';
 import { useNavigate } from 'react-router-dom';
 import { StoreType } from '../../../s1-main/m2-bll/store';
+import css from "../p1-recovery/PasswordRecovery.module.css";
 
 
 
@@ -25,10 +26,20 @@ const PasswordRecovery = () => {
     };
 
     return (
-        <div>
-            <span>Forgot your password?</span>
+        <div className={css.loginFormWrapper}>
+            <div className={css.loginFormContainer}>
+            <h2>Forgot your password?</h2>
             <div>
                 <SuperInputText onChange={onChangeEmailHandler}></SuperInputText>
+
+                <div className={css.infoMessage + " " + 
+                    (resetPasswordStatus === "success" ? css.succesMessage : 
+                        resetPasswordStatus === "error" ? css.errorMessage : css.noMessage
+                    )} >
+                    <span>Instructions sent. Please, check your email</span>
+                    {/* in future change text on server response message */}
+                </div>
+                
                 <br/>
                 <span>Enter your email address and we will send you further instructions</span>
             </div>
@@ -45,6 +56,7 @@ const PasswordRecovery = () => {
                 <br/>
                 <SuperButton onClick={()=> navigate("/login")}>Try logginin in</SuperButton>
             </div>
+        </div>
         </div>
     );
 };
