@@ -14,7 +14,21 @@ export const authAPI = {
     Login(email: string, password: string, rememberMe: boolean) {
         return instance.post(`auth/login`, {email, password, rememberMe})
     },
-    me() {
-        return instance.post(`auth/me`)
-    }
+    me(id: string, email: string, name: string, avatar?: string) {
+        return instance.get(`auth/me`)
+    },
+    
+}
+
+export const PasswordAPI = {
+    changePassword(password: string, resetPasswordToken: string) {
+        return instance.post(`auth/set-new-password`, {password, resetPasswordToken})
+    },
+    recoverPassword(email: string, from: string) {
+        const message = `<div style="background-color: lime; padding: 15px">
+            password recovery link: 
+            <a href='http://localhost:3000/flashcards#/set-new-password/$token$'>
+            link</a></div>` ;
+        return instance.post(`auth/forgot`, {email, from, message});
+    },
 }

@@ -7,7 +7,7 @@ export const PATH = {
     PROFILE: '/profile',
     PASSWORD: {
         RECOVERY: '/recovery',
-        CHANGE: '/change'
+        CHANGE: '/change/:resetPasswordToken'
     },
     E404: '*'
 }
