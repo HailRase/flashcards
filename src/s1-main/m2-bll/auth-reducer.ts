@@ -80,10 +80,10 @@ export const loginData = (email: string, password: string, rememberMe: boolean) 
 }
 
 export const meData = () => () => {
-    authAPI.me()
+   /* authAPI.me()
         .then(response => {
             console.log(response)
-        })
+        })*/
 }
 type setIsLoggedInAcType = ReturnType<typeof setIsLoggedInAc>
 type setUserDataACType = ReturnType<typeof setUserDataAC>
