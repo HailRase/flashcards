@@ -27,8 +27,8 @@ export const changePassword = (password: string, token: string) => {
 }
 
 export const recoveryPassword = (email: string, from: string) => {
-
     return (dispatch: Dispatch<SetResetPasswordStatusAction>) => {
+        dispatch(setResetPasswordStatus("loading"))
         let action: SetResetPasswordStatusAction;
         PasswordAPI.recoverPassword(email, from).then(res => {
             action = setResetPasswordStatus("success")
@@ -59,7 +59,7 @@ export const passwordReducer = (
 };
 
 // TYPES
-export type ResetPasswordStatus = "init" | "success" | "error";
+export type ResetPasswordStatus = "init" | 'loading' | "success" | "error";
 
 export type PasswordReducerType = {
     resetPasswordStatus: ResetPasswordStatus;
