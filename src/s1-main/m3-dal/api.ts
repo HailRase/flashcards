@@ -27,7 +27,7 @@ export const PasswordAPI = {
     recoverPassword(email: string, from: string) {
         const message = `<div style="background-color: lime; padding: 15px">
             password recovery link: 
-            <a href='http://localhost:3000/flashcards#/set-new-password/$token$'>
+            <a href='https://hailrase.github.io/flashcards/#/change/$token$'>
             link</a></div>` ;
         return instance.post(`auth/forgot`, {email, from, message});
     },
