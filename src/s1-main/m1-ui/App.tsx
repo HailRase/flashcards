@@ -45,6 +45,8 @@ const App = () => {
     );
 }
 
+export default App;
+
 const Flashcards = () => {
     return (
         <HashRouter>
@@ -55,4 +57,4 @@ const Flashcards = () => {
     )
 }
 
-export default Flashcards;
+// export default Flashcards;
