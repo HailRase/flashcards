@@ -3,8 +3,7 @@ import axios from "axios";
 
 const instance = axios.create({
     withCredentials: true,
-    //baseURL: 'https://github.com/IgnatZakalinsky/cards-nya-back-2-0',
-    baseURL: 'http://localhost:7542/2.0/',
+    baseURL: process.env.REACT_APP_API_BASE,
 })
 
 
@@ -31,7 +30,7 @@ export const PasswordAPI = {
     recoverPassword(email: string, from: string) {
         const message = `<div style="background-color: lime; padding: 15px">
             password recovery link: 
-            <a href='https://hailrase.github.io/flashcards/#/change/$token$'>
+            <a href='${process.env.REACT_APP_APP_ADDRESS}#/change/$token$'>
             link</a></div>` ;
         return instance.post(`auth/forgot`, { email, from, message });
     },
