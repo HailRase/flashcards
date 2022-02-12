@@ -5,7 +5,7 @@ import {useDispatch} from 'react-redux';
 import {useAppSelector} from "../m2-bll/store";
 import {initializeApp} from "../m2-bll/app-reducer";
 
-import { PATH } from './routes/routes';
+import {PATH} from './routes/routes';
 
 import Preloader from "./common/Preloader/Preloader";
 import Header from "./header/Header";
@@ -20,11 +20,11 @@ import E404 from '../../s2-features/f4-E404/E404';
 const App = () => {
     const initialized = useAppSelector(state => state.app.initialized)
     const dispatch = useDispatch()
-    useEffect(()=> {
+    useEffect(() => {
         dispatch(initializeApp())
     }, [])
 
-    if (!initialized){
+    if (!initialized) {
         return <Preloader/>
     }
     return (
