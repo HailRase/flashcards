@@ -1,6 +1,6 @@
 import {authAPI} from "../m3-dal/auth";
 import {Dispatch} from "redux";
-import {ThunkType} from "./app-reducer";
+import {initializedSuccess, ThunkType} from "./app-reducer";
 
 
 const SET_USER_DATA = "SET-USER-DATA"
@@ -91,6 +91,7 @@ export const getAuthUserData = () =>  (dispatch: Dispatch) => {
     authAPI.me()
         .then(response => {
             dispatch(setUserData(response.data, true))
+            dispatch(initializedSuccess())
         })
 }
 type setUserDataACType = ReturnType<typeof setUserData>
