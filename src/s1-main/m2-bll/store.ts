@@ -4,12 +4,14 @@ import {profileReducer} from "./profile-reducer";
 import {authReducer} from "./auth-reducer";
 import {passwordReducer} from "./password-reducer";
 import {TypedUseSelectorHook, useSelector} from "react-redux";
+import appReducer from "./app-reducer";
 
 
 const rootReducer = combineReducers({
     profile: profileReducer,
     auth: authReducer,
-    password: passwordReducer
+    password: passwordReducer,
+    app: appReducer
 })
 
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))

@@ -2,7 +2,7 @@ import React, {ChangeEvent, useState} from 'react';
 import s from "../a2-register/Register.module.css";
 import SuperInputText from "../../../s1-main/m1-ui/common/c1-SuperInputText/SuperInputText";
 import SuperButton from "../../../s1-main/m1-ui/common/c2-SuperButton/SuperButton";
-import {loginData} from "../../../s1-main/m2-bll/auth-reducer";
+import {login} from "../../../s1-main/m2-bll/auth-reducer";
 import SuperCheckbox from "../../../s1-main/m1-ui/common/c3-SuperCheckbox/SuperCheckbox";
 import {Navigate, useNavigate} from "react-router-dom";
 import {PATH} from "../../../s1-main/m1-ui/routes/routes";
@@ -23,7 +23,7 @@ const Login = () => {
         setPassword(e.currentTarget.value)
     }
     const onClickSendLogin = () => {
-        dispatch(loginData(email, password, status))
+        dispatch(login(email, password, status))
     }
     const onClickChangeStatus = () => {
         setStatus(!status)

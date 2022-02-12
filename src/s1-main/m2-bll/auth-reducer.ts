@@ -1,5 +1,6 @@
 import {authAPI} from "../m3-dal/api";
 import {Dispatch} from "redux";
+import {ThunkType} from "./app-reducer";
 
 
 const SET_USER_DATA = "SET-USER-DATA"
@@ -32,16 +33,18 @@ export const initialState: InitialStateType = {
 
 export const authReducer = (state: AuthType = initialState, action: ActionAuthType): typeof initialState => {
     switch (action.type) {
-        case "Login/SET-IS-LOGGED-IN":
-            return {...state, isAuth: action.value};
         case SET_USER_DATA: {
-            return {...state, userData: action.userData}
+            return {
+                ...state,
+                userData: action.userData,
+                isAuth: true
+            }
         }
         default:
             return state
     }
 }
-export const setUserDataAC = (userData: userDataType
+export const setUserData = (userData: userDataType
     ) => {
         return {
             type: SET_USER_DATA,
@@ -49,16 +52,12 @@ export const setUserDataAC = (userData: userDataType
         } as const;
     }
 ;
-export const setIsLoggedInAc = (value: boolean) => {
-    return {
-        type: "Login/SET-IS-LOGGED-IN", value
-    } as const
-}
 
-export const registerData = (email: string, password: string, repeatPassword: string) => () => {
+
+export const register = (email: string, password: string, repeatPassword: string) => () => {
     authAPI.register(email, password, repeatPassword)
         .then(response => {
-            console.log(response)
+
         })
         .catch(e => {
             const error = e.response ? e.response.data.error : (e.message + 'more details in the console')
@@ -66,12 +65,10 @@ export const registerData = (email: string, password: string, repeatPassword: st
         })
 }
 
-export const loginData = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
+export const login = (email: string, password: string, rememberMe: boolean):ThunkType => (dispatch) => {
     authAPI.Login(email, password, rememberMe)
         .then(response => {
-            console.log(response.data)
-            dispatch(setUserDataAC(response.data));
-            dispatch(setIsLoggedInAc(true))
+            dispatch(getAuthUserData());
         })
         .catch(e => {
             const error = e.response ? e.response.data.error : (e.message + 'more details in the console')
@@ -79,16 +76,14 @@ export const loginData = (email: string, password: string, rememberMe: boolean) 
         })
 }
 
-export const meData = () => () => {
-   /* authAPI.me()
+export const getAuthUserData = () =>  (dispatch: Dispatch) => {
+    authAPI.me()
         .then(response => {
-            console.log(response)
-        })*/
+            dispatch(setUserData(response.data))
+        })
 }
-type setIsLoggedInAcType = ReturnType<typeof setIsLoggedInAc>
-type setUserDataACType = ReturnType<typeof setUserDataAC>
+type setUserDataACType = ReturnType<typeof setUserData>
 type ActionAuthType = setUserDataACType
-    | setIsLoggedInAcType
 
 
 
