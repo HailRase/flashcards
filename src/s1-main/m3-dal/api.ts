@@ -15,6 +15,10 @@ export const authAPI = {
     Login(email: string, password: string, rememberMe: boolean) {
         return instance.post(`auth/login`, {email, password, rememberMe})
     },
+    me() {
+        return instance.get(`auth/me`)
+    },
+
 }
 
 export const PasswordAPI = {
