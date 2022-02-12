@@ -1,4 +1,4 @@
-import {authAPI} from "../m3-dal/api";
+import {authAPI} from "../m3-dal/auth";
 import {Dispatch} from "redux";
 import {ThunkType} from "./app-reducer";
 

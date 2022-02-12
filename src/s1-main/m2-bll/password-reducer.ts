@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {PasswordAPI} from "../m3-dal/api";
+import {PasswordAPI} from "../m3-dal/password";
 
 // ACTIONS
 const setResetPasswordStatus = (status: ResetPasswordStatus) => {
