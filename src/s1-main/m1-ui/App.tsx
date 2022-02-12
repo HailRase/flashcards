@@ -24,27 +24,25 @@ const App = () => {
         dispatch(initializeApp())
     }, [])
 
-    return <Preloader />
+    if (!initialized) {
+        return <Preloader/>
+    }
+    return (
+        <div className="App">
+            <Header/>
+            <Routes>
+                <Route path='/' element={<Navigate to={PATH.PROFILE}/>}/>
+                <Route path={PATH.TEST} element={<Test/>}/>
+                <Route path={PATH.PROFILE} element={<Profile/>}/>
+                <Route path={PATH.AUTH.LOGIN} element={<Login/>}/>
+                <Route path={PATH.AUTH.REGISTER} element={<Register/>}/>
+                <Route path={PATH.PASSWORD.RECOVERY} element={<PasswordRecovery/>}/>
+                <Route path={PATH.PASSWORD.CHANGE} element={<ChangePassword/>}/>
+                <Route path={PATH.E404} element={<E404/>}/>
 
-    // if (!initialized) {
-    //     return <Preloader/>
-    // }
-    // return (
-    //     <div className="App">
-    //         <Header/>
-    //         <Routes>
-    //             <Route path='/' element={<Navigate to={PATH.PROFILE}/>}/>
-    //             <Route path={PATH.TEST} element={<Test/>}/>
-    //             <Route path={PATH.PROFILE} element={<Profile/>}/>
-    //             <Route path={PATH.AUTH.LOGIN} element={<Login/>}/>
-    //             <Route path={PATH.AUTH.REGISTER} element={<Register/>}/>
-    //             <Route path={PATH.PASSWORD.RECOVERY} element={<PasswordRecovery/>}/>
-    //             <Route path={PATH.PASSWORD.CHANGE} element={<ChangePassword/>}/>
-    //             <Route path={PATH.E404} element={<E404/>}/>
-
-    //         </Routes>
-    //     </div>
-    // );
+            </Routes>
+        </div>
+    );
 }
 
 export default App;
