@@ -13,7 +13,7 @@ const Main = () => {
     return (
         <div>
             <Routes>
-                <Route path='/' element={<Navigate to={PATH.TEST}/>}/>
+                <Route path='/' element={<Navigate to={PATH.PROFILE}/>}/>
                 <Route path={PATH.TEST} element={<Test/>}/>
                 <Route path={PATH.PROFILE} element={<Profile/>}/>
                 <Route path={PATH.AUTH.LOGIN} element={<Login/>}/>
