@@ -1,11 +1,4 @@
-import axios from "axios";
-
-
-const instance = axios.create({
-    withCredentials: true,
-    baseURL: process.env.REACT_APP_API_BASE,
-})
-
+import { instance } from "./instance"
 
 export const authAPI = {
     register(email: string, password: string, repeatPassword: string) {
