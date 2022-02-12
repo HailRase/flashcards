@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import './App.css';
-import {HashRouter, Navigate, Route, Routes} from "react-router-dom";
-import {Provider, useDispatch} from 'react-redux';
-import store, {useAppSelector} from "../m2-bll/store";
+import {Navigate, Route, Routes} from "react-router-dom";
+import {useDispatch} from 'react-redux';
+import {useAppSelector} from "../m2-bll/store";
 import {initializeApp} from "../m2-bll/app-reducer";
 
 import { PATH } from './routes/routes';
@@ -46,15 +46,3 @@ const App = () => {
 }
 
 export default App;
-
-const Flashcards = () => {
-    return (
-        <HashRouter>
-            <Provider store={store}>
-                <App/>
-            </Provider>
-        </HashRouter>
-    )
-}
-
-// export default Flashcards;
