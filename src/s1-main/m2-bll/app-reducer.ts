@@ -33,7 +33,11 @@ export const initializedSuccess = () => {
 }
 
 export const initializeApp = (): ThunkType => (dispatch) => {
-    dispatch(getAuthUserData())
+    let promise = dispatch(getAuthUserData())
+    Promise.all([promise])
+        .finally(() => {
+            dispatch(initializedSuccess())
+        })
 }
 
 

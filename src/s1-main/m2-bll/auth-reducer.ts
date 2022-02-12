@@ -88,10 +88,9 @@ export const logout = () => (dispatch: Dispatch) => {
 
 
 export const getAuthUserData = () =>  (dispatch: Dispatch) => {
-    authAPI.me()
+    return authAPI.me()
         .then(response => {
             dispatch(setUserData(response.data, true))
-            dispatch(initializedSuccess())
         })
 }
 type setUserDataACType = ReturnType<typeof setUserData>
