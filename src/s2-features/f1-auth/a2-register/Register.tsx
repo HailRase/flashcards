@@ -3,7 +3,7 @@ import SuperInputText from "../../../s1-main/m1-ui/common/c1-SuperInputText/Supe
 import SuperButton from '../../../s1-main/m1-ui/common/c2-SuperButton/SuperButton';
 import s from './Register.module.css'
 import {useDispatch} from "react-redux";
-import {registerData} from "../../../s1-main/m2-bll/auth-reducer";
+import {register} from "../../../s1-main/m2-bll/auth-reducer";
 
 const Register = () => {
 
@@ -23,7 +23,7 @@ const Register = () => {
         setRepeatPassword(e.currentTarget.value)
     }
     const onClickSendRegistrationData = () => {
-        dispatch(registerData(email, password, repeatPassword))
+        dispatch(register(email, password, repeatPassword))
     }
 
     return (

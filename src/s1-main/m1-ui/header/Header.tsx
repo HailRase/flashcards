@@ -1,11 +1,19 @@
 import React from 'react';
 import s from './Header.module.css'
-import {NavLink} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 import {PATH} from "../routes/routes";
-import SuperInputText from '../common/c1-SuperInputText/SuperInputText';
-import SuperButton from "../common/c2-SuperButton/SuperButton";
+import {useAppSelector} from "../../m2-bll/store";
+import {useDispatch} from "react-redux";
+import {logout} from "../../m2-bll/auth-reducer";
 
 const Header = () => {
+
+    const isAuth = useAppSelector(state => state.auth.isAuth)
+    const dispatch = useDispatch()
+    const noLogoutHandler = () => {
+        dispatch(logout())
+    }
+
     return (
         <div className={s.headerNavigator}>
             <div className={s.headerNavigatorLeft}>
@@ -15,13 +23,15 @@ const Header = () => {
                 </nav>
             </div>
             <div className={s.headerNavigatorRight}>
-                <nav className={s.navLinks}>
-                    <NavLink to={PATH.AUTH.LOGIN} className={s.navLink}>Sign In</NavLink>
-                    <NavLink to={PATH.AUTH.REGISTER} className={s.navLink}>Join</NavLink>
-                </nav>
+                {!isAuth
+                    ? <nav className={s.navLinks}>
+                        <NavLink to={PATH.AUTH.LOGIN} className={s.navLink}>Sign In</NavLink>
+                        <NavLink to={PATH.AUTH.REGISTER} className={s.navLink}>Join</NavLink>
+                    </nav>
+                    : <button onClick={noLogoutHandler} className={s.buttonLogout}>Logout</button>
+                }
             </div>
         </div>
     );
 };
-//sdfsdfgsdfg
 export default Header;

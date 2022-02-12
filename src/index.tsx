@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './s1-main/m1-ui/App';
+import Flashcards from './s1-main/m1-ui/App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Flashcards />
   </React.StrictMode>,
   document.getElementById('root')
 );
