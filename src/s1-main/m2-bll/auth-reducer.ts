@@ -16,7 +16,7 @@ export type userDataType = {
 };
 export type AuthType = typeof initialState;
 export type InitialStateType = {
-    userData: userDataType,
+    userData: userDataType | null
     isAuth: boolean
 }
 export const initialState: InitialStateType = {
@@ -37,18 +37,18 @@ export const authReducer = (state: AuthType = initialState, action: ActionAuthTy
             return {
                 ...state,
                 userData: action.userData,
-                isAuth: true
+                isAuth: action.isAuth
             }
         }
         default:
             return state
     }
 }
-export const setUserData = (userData: userDataType
-    ) => {
+export const setUserData = (userData: userDataType|null, isAuth: boolean) => {
         return {
             type: SET_USER_DATA,
-            userData
+            userData,
+            isAuth
         } as const;
     }
 ;
@@ -75,11 +75,22 @@ export const login = (email: string, password: string, rememberMe: boolean):Thun
             alert(error)
         })
 }
+export const logout = () => (dispatch: Dispatch) => {
+    authAPI.logout()
+        .then(response => {
+            dispatch(setUserData(null, false));
+        })
+        .catch(e => {
+            const error = e.response ? e.response.data.error : (e.message + 'more details in the console')
+            alert(error)
+        })
+}
+
 
 export const getAuthUserData = () =>  (dispatch: Dispatch) => {
     authAPI.me()
         .then(response => {
-            dispatch(setUserData(response.data))
+            dispatch(setUserData(response.data, true))
         })
 }
 type setUserDataACType = ReturnType<typeof setUserData>
