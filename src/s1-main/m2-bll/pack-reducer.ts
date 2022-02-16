@@ -1,5 +1,58 @@
 import { GetPacksParams, IPack } from "../m3-dal/pack";
 
+// Actions
+export const setPacks = (packs: IPack[]) => {
+    return {
+        type: "PACK/SET_PACKS",
+        packs,
+    } as const;
+};
+
+type SetPacks = ReturnType<typeof setPacks>;
+
+export const setPacksTotalCount = (packsTotal: number) => {
+    return {
+        type: "PACK/SET_PACKS_TOTAL",
+        packsTotal
+    } as const;
+}
+
+type SetPacksTotalCount = ReturnType<typeof setPacksTotalCount>;
+
+export const setPackStatus = (status: PackStatus) => {
+    return {
+        type: "PACK/SET_STATUS",
+        status,
+    } as const;
+};
+
+type SetPackStatus = ReturnType<typeof setPackStatus>;
+
+export const setPackError = (errorMessage: string) => {
+    return {
+        type: "PACK/SET_ERROR",
+        errorMessage,
+    } as const;
+};
+
+type SetPackError = ReturnType<typeof setPackError>;
+
+export const setPackFilter = (filter: PackFilter) => {
+    return {
+        type: "PACK/SET_FILTER",
+        filter,
+    } as const;
+}
+
+type SetPackFilter = ReturnType<typeof setPackFilter>;
+
+type PackAction =
+    | SetPacks
+    | SetPackStatus
+    | SetPackError
+    | SetPackFilter
+    | SetPacksTotalCount;
+    
 // Reducer State Type
 interface PackState {
   status: PackStatus;
