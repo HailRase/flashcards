@@ -102,8 +102,39 @@ const initialState: PackState = {
     packsTotal: 0,
 };
 
-export const packReducer = (state: any, action: any): any => {
-  return state;
+// Reducer
+export const packReducer = (state = initialState, action: PackAction): PackState => {
+    switch (action.type) {
+        case "PACK/SET_PACKS": {
+            return {...state, packs: action.packs};
+        }
+
+        case "PACK/SET_PACKS_TOTAL": {
+            return {...state, packsTotal: action.packsTotal};
+        }
+
+        case "PACK/SET_STATUS": {
+            return {...state, status: action.status};
+        }
+
+        case "PACK/SET_ERROR": {
+            return {
+                ...state,
+                status: "error",
+                errorMessage: action.errorMessage,
+            };
+        }
+
+        case "PACK/SET_FILTER": {
+            return {
+                ...state,
+                filter: action.filter,
+            };
+        }
+
+        default:
+            return state;
+    }
 };
 
 // TYPES
