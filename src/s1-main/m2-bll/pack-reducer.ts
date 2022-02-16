@@ -87,6 +87,21 @@ interface PackState {
   errorMessage?: string;
 }
 
+const initialState: PackState = {
+    status: "init",
+    filter: { // Фильтр для поиска
+        pageCount: 15, // Кол-во паков на странице
+        min: 0, // Мин. кол-во карт в паке
+        max: 150, // Макс. кол-во карт в паке
+        packName: "", // Название пака
+        page: 1, // Текущая страница
+        sortPacks: "0updated", // Сортировка паков
+        user_id: "", // Айди автора
+    },
+    packs: [],
+    packsTotal: 0,
+};
+
 export const packReducer = (state: any, action: any): any => {
   return state;
 };
