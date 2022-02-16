@@ -1,4 +1,6 @@
-import { GetPacksParams, IPack } from "../m3-dal/pack";
+import { ThunkAction } from "redux-thunk";
+import { GetPacksParams, IPack, packAPI } from "../m3-dal/pack";
+import { StoreType } from "./store";
 
 // Actions
 export const setPacks = (packs: IPack[]) => {
@@ -52,7 +54,30 @@ type PackAction =
     | SetPackError
     | SetPackFilter
     | SetPacksTotalCount;
-    
+
+// Thunks
+export const fetchPacks = (filter: PackFilter): PackThunkAction => {
+    return async (dispatch) => {
+        dispatch(setPackStatus("loading"));
+        dispatch(setPackFilter(filter));
+        try {
+            const {cardPacks, cardPacksTotalCount} = (
+                await packAPI.getPacks(filter)
+            ).data;
+            dispatch(setPacksTotalCount(cardPacksTotalCount));
+            dispatch(setPacks(cardPacks));
+            dispatch(setPackStatus("loaded"));
+        } catch {
+            dispatch(setPackError("Could not Fetch Packs"));
+        }
+    };
+};
+
+type PackThunkAction = ThunkAction<Promise<void>,
+    StoreType,
+    void,
+    PackAction>;
+
 // Reducer State Type
 interface PackState {
   status: PackStatus;
