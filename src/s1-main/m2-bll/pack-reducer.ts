@@ -1,6 +1,6 @@
-import { ThunkAction } from "redux-thunk";
-import { GetPacksParams, IPack, packAPI } from "../m3-dal/pack";
-import { StoreType } from "./store";
+import {ThunkAction} from "redux-thunk";
+import {GetPacksParams, IPack, packAPI} from "../m3-dal/pack";
+import {StoreType} from "./store";
 
 // Actions
 export const setPacks = (packs: IPack[]) => {
@@ -80,11 +80,11 @@ type PackThunkAction = ThunkAction<Promise<void>,
 
 // Reducer State Type
 interface PackState {
-  status: PackStatus;
-  filter: PackFilter;
-  packs: IPack[];
-  packsTotal: number;
-  errorMessage?: string;
+    status: PackStatus;
+    filter: PackFilter;
+    packs: IPack[];
+    packsTotal: number;
+    errorMessage?: string;
 }
 
 const initialState: PackState = {
@@ -139,19 +139,20 @@ export const packReducer = (state = initialState, action: PackAction): PackState
 
 // TYPES
 export type SortPacks =
-  | "0updated"
-  | "1updated"
-  | "0name"
-  | "1name"
-  | "0cardsCount"
-  | "1cardsCount";
+    | "0updated"
+    | "1updated"
+    | "0name"
+    | "1name"
+    | "0cardsCount"
+    | "1cardsCount";
 
 export interface PackFilter
-  extends Required<Omit<GetPacksParams, "sortPacks">> {
-  sortPacks: SortPacks;
+    extends Required<Omit<GetPacksParams, "sortPacks">> {
+    sortPacks: SortPacks;
 }
+
 export type PackStatus =
-  | "init"
-  | "loading"
-  | "loaded"
-  | "error";
+    | "init"
+    | "loading"
+    | "loaded"
+    | "error";
