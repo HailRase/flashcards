@@ -46,7 +46,7 @@ export const packAPI = {
 };
 
 // getPacks Types
-interface GetPacksParams {
+export interface GetPacksParams {
     packName?: string;
     min?: number;
     max?: number;
