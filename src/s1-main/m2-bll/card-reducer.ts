@@ -1,4 +1,6 @@
-import {GetCardsParams, ICard} from "../m3-dal/card";
+import {cardAPI, GetCardsParams, ICard} from "../m3-dal/card";
+import {ThunkAction} from "redux-thunk";
+import {StoreType} from "./store";
 
 // Actions
 export const setCards = (cards: ICard[]) => {
@@ -53,6 +55,33 @@ export type CardAction =
     | SetCardFilter
     | SetCardsTotalCount;
 
+// Thunks
+export const fetchCards = (
+    filter: CardFilter
+): CardThunkAction => {
+    return async (dispatch) => {
+        dispatch(setCardStatus("loading"));
+        dispatch(setCardFilter(filter));
+
+        if (!filter.cardsPack_id.length) return;
+
+        try {
+            const {cards, cardsTotalCount} = (
+                await cardAPI.getCards(filter)
+            ).data;
+            dispatch(setCardsTotalCount(cardsTotalCount));
+            dispatch(setCards(cards));
+            dispatch(setCardStatus("loaded"));
+        } catch {
+            dispatch(setCardError("Could not Fetch Packs"));
+        }
+    };
+};
+
+type CardThunkAction = ThunkAction<Promise<void>,
+    StoreType,
+    void,
+    CardAction>;
 
 // Reducer State Type
 interface CardState {
