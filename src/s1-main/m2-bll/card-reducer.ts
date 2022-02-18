@@ -63,8 +63,55 @@ interface CardState {
     errorMessage?: string;
 }
 
-export const cardReducer = (state: any, action: any): any => {
-    return state;
+// Reducer
+const initialState: CardState = {
+    status: "init",
+    filter: {
+        cardsPack_id: "",
+        cardQuestion: "",
+        cardAnswer: "",
+        min: 1,
+        max: 5,
+        page: 1,
+        pageCount: 20,
+        sortCards: "0updated",
+    },
+    cards: [],
+    cardsTotal: 0,
+};
+
+export const cardReducer = (state = initialState, action: CardAction): any => {
+    switch (action.type) {
+        case "CARD/SET_CARDS": {
+            return {...state, cards: action.cards};
+        }
+
+        case "CARD/SET_CARDS_TOTAL": {
+            return {...state, cardsTotal: action.cardsTotal};
+        }
+
+        case "CARD/SET_STATUS": {
+            return {...state, status: action.status};
+        }
+
+        case "CARD/SET_ERROR": {
+            return {
+                ...state,
+                status: "error",
+                errorMessage: action.errorMessage,
+            };
+        }
+
+        case "CARD/SET_FILTER": {
+            return {
+                ...state,
+                filter: action.filter,
+            };
+        }
+
+        default:
+            return state;
+    }
 }
 
 // Types
