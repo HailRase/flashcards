@@ -9,5 +9,6 @@ export const PATH = {
         RECOVERY: '/recovery',
         CHANGE: '/change/:resetPasswordToken'
     },
-    E404: '*'
+    E404: '*',
+    PACKS: '/packs',
 }

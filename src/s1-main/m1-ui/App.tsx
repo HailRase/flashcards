@@ -16,6 +16,7 @@ import Register from '../../s2-features/f1-auth/a2-register/Register';
 import PasswordRecovery from '../../s2-features/f3-password/p1-recovery/PasswordRecovery';
 import ChangePassword from '../../s2-features/f3-password/p2-change/ChangePassword';
 import E404 from '../../s2-features/f4-E404/E404';
+import Packs from '../../s2-features/f5-packs/Packs';
 
 const App = () => {
     const initialized = useAppSelector(state => state.app.initialized)
@@ -34,6 +35,7 @@ const App = () => {
                 <Route path='/' element={<Navigate to={PATH.PROFILE}/>}/>
                 <Route path={PATH.TEST} element={<Test/>}/>
                 <Route path={PATH.PROFILE} element={<Profile/>}/>
+                <Route path={PATH.PACKS} element={<Packs/>}/>
                 <Route path={PATH.AUTH.LOGIN} element={<Login/>}/>
                 <Route path={PATH.AUTH.REGISTER} element={<Register/>}/>
                 <Route path={PATH.PASSWORD.RECOVERY} element={<PasswordRecovery/>}/>
