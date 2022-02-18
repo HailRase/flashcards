@@ -6,6 +6,7 @@ import {passwordReducer} from "./password-reducer";
 import {TypedUseSelectorHook, useSelector} from "react-redux";
 import appReducer from "./app-reducer";
 import { packReducer } from "./pack-reducer";
+import {cardReducer} from "./card-reducer";
 
 
 const rootReducer = combineReducers({
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
     auth: authReducer,
     password: passwordReducer,
     app: appReducer,
-    pack: packReducer
+    pack: packReducer,
+    card: cardReducer
 })
 
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
