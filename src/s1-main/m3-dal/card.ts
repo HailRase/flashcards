@@ -1,6 +1,6 @@
 import {instance} from "./instance";
 
-interface ICard {
+export interface ICard {
     _id: string;
     cardsPack_id: string;
     user_id: string;
@@ -55,7 +55,7 @@ interface Response {
 }
 
 // getCards Types
-interface GetCardsParams {
+export interface GetCardsParams {
     cardAnswer?: string;
     cardQuestion?: string;
     cardsPack_id: string;
