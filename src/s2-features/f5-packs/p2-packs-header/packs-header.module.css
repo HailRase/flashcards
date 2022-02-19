@@ -18,7 +18,7 @@
 }
 
 .search_container {
-    width: 360px;
+    width: 425px;
     background: #ECECF9;
     border: 1px solid #635D80;
     border-radius: 2px;
@@ -50,4 +50,5 @@
     text-align: center;
     letter-spacing: 0.01em;
     cursor: pointer;
+    width: 190px;
 }

@@ -9,7 +9,7 @@ const PacksHeader: FC = () => {
         <div className={s.tools}>
             <div className={s.search_container}>
                 <img src={searchIcon} alt="search packs"/>
-                <input className={s.input} type="text" name="Search..." placeholder="search"/>
+                <input className={s.input} type="text" name="search" placeholder="Search..."/>
             </div>
             <button className={s.button}>Add New Pack</button>
         </div>
