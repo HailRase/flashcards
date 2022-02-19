@@ -6,18 +6,7 @@ import {StoreType} from "../../../s1-main/m2-bll/store";
 import s from "./packs-table.module.css"
 
 import spinner from "../../../assets/spinner.gif";
-
-const TableHeader = () => {
-    return <div className={s.header}>
-
-        <div className={s.col_0}>Name</div>
-        <div className={s.col_1}>Cards</div>
-        <div className={s.col_2}>Last Updated</div>
-        <div className={s.col_3}>Created By</div>
-        <div className={s.col_4}>Actions</div>
-
-    </div>
-}
+import PacksTableHeader from "./PacksTableHeader";
 
 const EmptyRow = (i: number) => {
     return <div key={i} className={`${s.row} ${i % 2 && s.dark}`}>
@@ -69,13 +58,13 @@ const PacksTable: FC = () => {
 
     if (status !== "loaded") {
         return <div className={s.table}>
-            <TableHeader/>
+            <PacksTableHeader/>
             <TableSpinner/>
         </div>
     }
 
     return <div className={s.table}>
-        <TableHeader/>
+        <PacksTableHeader/>
         {Rows}
         {EmptyRows}
     </div>

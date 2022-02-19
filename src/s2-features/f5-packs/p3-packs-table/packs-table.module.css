@@ -44,6 +44,25 @@
     background: #ECECF9;
 }
 
+.sort {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sort:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.sort_icon {
+  transition: all 0.2s ease-out;
+}
+
+.sort_icon_upwards {
+  transform: rotate(180deg);
+}
+
 /* Name */
 .col_0 {
     width: 190px;
