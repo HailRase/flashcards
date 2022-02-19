@@ -9,17 +9,25 @@ import PacksHeader from "./p2-packs-header/PacksHeader";
 import PacksTable from "./p3-packs-table/PacksTable";
 
 import s from "./packs.module.css"
+import Pagination from "../../s1-main/m1-ui/common/c4-Pagintation/Pagination";
 
 const Packs: FC = () => {
     const isAuth = useSelector<StoreType, boolean>(state => state.auth.isAuth);
-    const {status, filter} = useSelector<StoreType, PackState>(state => state.pack);
+    const {status, filter, packsTotal} = useSelector<StoreType, PackState>(state => state.pack);
     const dispatch = useDispatch();
+
+    const itemsPerPage = filter.pageCount
+    const maxPageNumber = Math.ceil(packsTotal / itemsPerPage)
 
     useEffect(() => {
         if (status === "init" && isAuth) {
             dispatch(fetchPacks(filter));
         }
     }, [status, isAuth, dispatch, filter])
+
+    const onPageChange = (page: number) => {
+        dispatch(fetchPacks({...filter, page}))
+    }
 
     if (!isAuth) return <Navigate replace to={PATH.AUTH.LOGIN}/>
 
@@ -28,6 +36,10 @@ const Packs: FC = () => {
         <main className={s.main}>
             <PacksHeader/>
             <PacksTable/>
+            <Pagination currentPage={filter.page}
+                        maxPage={maxPageNumber}
+                        onChange={onPageChange}
+                        itemsPerPage={itemsPerPage}/>
         </main>
     </div>
 }

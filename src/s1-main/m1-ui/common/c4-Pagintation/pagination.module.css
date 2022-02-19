@@ -1,0 +1,5 @@
+.container {
+    box-sizing: border-box;
+    padding: 24px 48px;
+    display: flex;
+}
