@@ -79,7 +79,7 @@ type PackThunkAction = ThunkAction<Promise<void>,
     PackAction>;
 
 // Reducer State Type
-interface PackState {
+export interface PackState {
     status: PackStatus;
     filter: PackFilter;
     packs: IPack[];
