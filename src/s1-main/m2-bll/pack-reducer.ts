@@ -73,6 +73,23 @@ export const fetchPacks = (filter: PackFilter): PackThunkAction => {
     };
 };
 
+export const createPack = (name: string): PackThunkAction => {
+    return async (dispatch, getState) => {
+        dispatch(setPackStatus("loading"));
+        try {
+            await packAPI.createPack({name});
+            const {cardPacks, cardPacksTotalCount} = (
+                await packAPI.getPacks(getState().pack.filter)
+            ).data;
+            dispatch(setPacksTotalCount(cardPacksTotalCount));
+            dispatch(setPacks(cardPacks));
+            dispatch(setPackStatus("loaded"));
+        } catch {
+            dispatch(setPackError("Could not Create Pack"));
+        }
+    }
+}
+
 type PackThunkAction = ThunkAction<Promise<void>,
     StoreType,
     void,
