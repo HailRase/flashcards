@@ -90,7 +90,7 @@ export interface PackState {
 const initialState: PackState = {
     status: "init",
     filter: { // Фильтр для поиска
-        pageCount: 15, // Кол-во паков на странице
+        pageCount: 10, // Кол-во паков на странице
         min: 0, // Мин. кол-во карт в паке
         max: 150, // Макс. кол-во карт в паке
         packName: "", // Название пака
