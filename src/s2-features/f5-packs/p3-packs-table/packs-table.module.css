@@ -93,3 +93,17 @@
     width: 200px;
     margin: 96px auto;
 }
+
+.icon {
+    width: 15px;
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+.icon_red {
+    filter: invert(39%) sepia(58%) saturate(5312%) hue-rotate(342deg) brightness(101%) contrast(84%);
+}
+
+.icon_blue {
+    filter: invert(16%) sepia(53%) saturate(3546%) hue-rotate(232deg) brightness(84%) contrast(106%);
+}

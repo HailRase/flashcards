@@ -6,15 +6,19 @@ import {StoreType} from "../../../s1-main/m2-bll/store";
 import s from "./packs-table.module.css"
 
 import spinner from "../../../assets/spinner.gif";
+import deleteIcon from "../../../assets/delete_icon.svg";
+import editIcon from "../../../assets/edit_icon.svg";
+import eyeIcon from "../../../assets/eye_icon.svg"
+
 import PacksTableHeader from "./PacksTableHeader";
 
 const EmptyRow = (i: number) => {
     return <div key={i} className={`${s.row} ${i % 2 && s.dark}`}>
-        <div className={s.col_0}> </div>
-        <div className={s.col_1}> </div>
-        <div className={s.col_2}> </div>
-        <div className={s.col_3}> </div>
-        <div className={s.col_4}> </div>
+        <div className={s.col_0}></div>
+        <div className={s.col_1}></div>
+        <div className={s.col_2}></div>
+        <div className={s.col_3}></div>
+        <div className={s.col_4}></div>
     </div>
 }
 
@@ -34,10 +38,10 @@ const PacksTable: FC = () => {
             <div className={s.col_2}>{pack.updated.substring(0, 10)}</div>
             <div className={s.col_3}>{pack.user_name}</div>
             <div className={s.col_4}>{pack.user_id === id && <>
-                <button>e</button>
-                <button>x</button>
+                <img src={deleteIcon} alt="delete my pack" className={`${s.icon} ${s.icon_red}`}/>
+                <img src={editIcon} alt="edit my pack" className={`${s.icon} ${s.icon_blue}`}/>
             </>}
-                <button>learn</button>
+                <img src={eyeIcon} alt="view cards" className={`${s.icon} ${s.icon_blue}`}/>
             </div>
         </div>)
     });
