@@ -1,7 +1,46 @@
 .sidebar {
+    box-sizing: border-box;
     background: #ECECF9;
     padding: 24px;
     width: 240px;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    padding: 9px 0;
+    text-align: left;
+    color: #2D2E46;
+}
+
+.select_container {
+    display: flex;
+    margin-top: 12px;
+    margin-bottom: 35px;
+}
+
+.select_container > :first-child {
+    border-radius: 2px 0 0 2px;
+}
+
+.select_container > :last-child {
+    border-radius: 0 2px 2px 0;
+}
+
+.select {
+    cursor: pointer;
+    color: #2D2E46;
+    font-size: 14px;
+    line-height: 17px;
+    padding: 10px 30px;
+    width: 200px;
+    background: white;
+}
+
+.selected {
+    background: #9A91C8;
+    color: white;
 }
