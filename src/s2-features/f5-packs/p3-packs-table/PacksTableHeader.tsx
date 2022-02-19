@@ -58,9 +58,10 @@ const PacksTableHeader: FC = () => {
         <div className={`${s.col_2} ${s.sort}`} 
               onClick={sortByDate}>Last Updated {currentSortBy === "updated" && (Icon)}</div>
 
-        <div className={`${s.col_3} ${s.sort}`}>Created By</div>
+        {/* <div className={`${s.col_3} ${s.sort}`}>Created By</div> */}
+        <div className={s.col_3}>Created By</div>
 
-        <div className={`${s.col_4} ${s.sort}`}>Actions</div>
+        <div className={s.col_4}>Actions</div>
 
     </div>
 }
