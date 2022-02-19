@@ -42,24 +42,32 @@ const PacksTableHeader: FC = () => {
         }
     }
 
-    const Icon = <img 
-      src={sortIcon} 
-      alt="sort" 
-      className={`${s.sort_icon} ${currentOrder && s.sort_icon_upwards}`}/>
+    const sortByUser = () => {
+        if (currentSortBy === "user_name") {
+            changeSort("user_name", currentOrder ? 0 : 1);
+        } else {
+            changeSort("user_name", 0);
+        }
+    }
+
+    const Icon = <img
+        src={sortIcon}
+        alt="sort"
+        className={`${s.sort_icon} ${currentOrder && s.sort_icon_upwards}`}/>
 
     return <div className={s.header}>
 
-        <div className={`${s.col_0} ${s.sort}`} 
-              onClick={sortByName}>Name {currentSortBy === "name" && (Icon)}</div>
+        <div className={`${s.col_0} ${s.sort}`}
+             onClick={sortByName}>Name {currentSortBy === "name" && (Icon)}</div>
 
         <div className={`${s.col_1} ${s.sort}`}
              onClick={sortByNumber}>Cards {currentSortBy === "cardsCount" && (Icon)}</div>
 
-        <div className={`${s.col_2} ${s.sort}`} 
-              onClick={sortByDate}>Last Updated {currentSortBy === "updated" && (Icon)}</div>
+        <div className={`${s.col_2} ${s.sort}`}
+             onClick={sortByDate}>Last Updated {currentSortBy === "updated" && (Icon)}</div>
 
-        {/* <div className={`${s.col_3} ${s.sort}`}>Created By</div> */}
-        <div className={s.col_3}>Created By</div>
+        <div className={`${s.col_3} ${s.sort}`}
+             onClick={sortByUser}>Created By {currentSortBy === "user_name" && (Icon)}</div>
 
         <div className={s.col_4}>Actions</div>
 

@@ -139,6 +139,8 @@ export const packReducer = (state = initialState, action: PackAction): PackState
 
 // TYPES
 export type SortPacks =
+    | "0user_name"
+    | "1user_name"
     | "0updated"
     | "1updated"
     | "0name"
