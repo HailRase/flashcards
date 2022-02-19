@@ -46,11 +46,11 @@ const PacksTable: FC = () => {
     let EmptyRows: JSX.Element[] = [];
     if (pageCount > packs.length) {
         if (!packs.length) {
-            for (let i = 0; i < pageCount - packs.length; i++) {
+            for (let i = 0; i < pageCount; i++) {
                 EmptyRows.push(EmptyRow(i))
             }
         } else {
-            for (let i = pageCount - packs.length; i < pageCount; i++) {
+            for (let i = packs.length; i < pageCount; i++) {
                 EmptyRows.push(EmptyRow(i))
             }
         }
