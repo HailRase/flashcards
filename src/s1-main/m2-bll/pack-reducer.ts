@@ -90,6 +90,23 @@ export const createPack = (name: string): PackThunkAction => {
     }
 }
 
+export const deletePack = (id: string): PackThunkAction => {
+    return async (dispatch, getState) => {
+        dispatch(setPackStatus("loading"));
+        try {
+            await packAPI.deletePack({id});
+            const {cardPacks, cardPacksTotalCount} = (
+                await packAPI.getPacks(getState().pack.filter)
+            ).data;
+            dispatch(setPacksTotalCount(cardPacksTotalCount));
+            dispatch(setPacks(cardPacks));
+            dispatch(setPackStatus("loaded"));
+        } catch {
+            dispatch(setPackError("Could not Delete Pack"));
+        }
+    }
+}
+
 type PackThunkAction = ThunkAction<Promise<void>,
     StoreType,
     void,
