@@ -4,7 +4,7 @@ import s from "./packs-header.module.css"
 import searchIcon from "../../../assets/search_icon.png";
 import {useDispatch, useSelector} from "react-redux";
 import {StoreType} from "../../../s1-main/m2-bll/store";
-import {fetchPacks, PackState} from "../../../s1-main/m2-bll/pack-reducer";
+import {createPack, fetchPacks, PackState} from "../../../s1-main/m2-bll/pack-reducer";
 
 const PacksHeader: FC = () => {
     const [searchValue, setSearchValue] = useState("");
@@ -23,6 +23,10 @@ const PacksHeader: FC = () => {
         setSearchValue(e.currentTarget.value);
     }
 
+    const createPackHandler = () => {
+        dispatch(createPack("Gachi Pack"));
+    }
+
     return <div className={s.header}>
         <h2 className={s.title}>Packs List</h2>
         <div className={s.tools}>
@@ -31,7 +35,7 @@ const PacksHeader: FC = () => {
                 <input className={s.input} type="text" value={searchValue} onChange={onSearchChange} name="search"
                        placeholder="Search..."/>
             </div>
-            <button className={s.button}>Add New Pack</button>
+            <button className={s.button} onClick={createPackHandler}>Add New Pack</button>
         </div>
     </div>
 }
