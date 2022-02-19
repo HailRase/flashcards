@@ -1,9 +1,9 @@
 .container {
-  margin:  auto;
-  margin-top: 24px;
+    box-sizing: border-box;
+  margin: 24px auto auto;
   width: 1000px;
-  height: 650px;
-  border: 1px solid black;
-  border-radius: 15px;
-  display: flex;
+    min-height: 650px;
+    border: 1px solid black;
+    border-radius: 15px;
+    display: flex;
 }
