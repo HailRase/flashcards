@@ -1,0 +1,110 @@
+.table {
+    border-spacing: 0;
+    width: 670px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 14px rgba(45, 46, 70, 0.15);
+    border-radius: 10px;
+    margin: 0 48px;
+    margin-bottom: 24px;
+}
+
+.table > :last-child {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.header {
+    padding: 16px 24px;
+    background: #ECECF9;
+    display: flex;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 16px;
+    color: #2D2E46;
+    text-align: left;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.row {
+    padding: 16px 24px;
+    height: 48px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    text-align: left;
+    flex-wrap: nowrap;
+    font-size: 13px;
+    line-height: 16px;
+    color: #2D2E46;
+    /* overflow: hidden; */
+}
+
+.dark {
+    background: #ECECF9;
+}
+
+.sort {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sort:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.sort_icon {
+  transition: all 0.2s ease-out;
+}
+
+.sort_icon_upwards {
+  transform: rotate(180deg);
+}
+
+/* Name */
+.col_0 {
+    width: 190px;
+}
+
+/* Cards */
+.col_1 {
+    width: 60px;
+}
+
+/* Last Updated */
+.col_2 {
+    width: 110px;
+}
+
+/* Name */
+.col_3 {
+    width: 190px;
+}
+
+/* Actions */
+.col_4 {
+    display: flex;
+}
+
+.spinner {
+    position: relative;
+    width: 200px;
+    margin: 140px auto;
+}
+
+.icon {
+    width: 15px;
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+.icon_red {
+    filter: invert(39%) sepia(58%) saturate(5312%) hue-rotate(342deg) brightness(101%) contrast(84%);
+}
+
+.icon_blue {
+    filter: invert(16%) sepia(53%) saturate(3546%) hue-rotate(232deg) brightness(84%) contrast(106%);
+}

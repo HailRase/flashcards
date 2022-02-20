@@ -73,13 +73,47 @@ export const fetchPacks = (filter: PackFilter): PackThunkAction => {
     };
 };
 
+export const createPack = (name: string): PackThunkAction => {
+    return async (dispatch, getState) => {
+        dispatch(setPackStatus("loading"));
+        try {
+            await packAPI.createPack({name});
+            const {cardPacks, cardPacksTotalCount} = (
+                await packAPI.getPacks(getState().pack.filter)
+            ).data;
+            dispatch(setPacksTotalCount(cardPacksTotalCount));
+            dispatch(setPacks(cardPacks));
+            dispatch(setPackStatus("loaded"));
+        } catch {
+            dispatch(setPackError("Could not Create Pack"));
+        }
+    }
+}
+
+export const deletePack = (id: string): PackThunkAction => {
+    return async (dispatch, getState) => {
+        dispatch(setPackStatus("loading"));
+        try {
+            await packAPI.deletePack({id});
+            const {cardPacks, cardPacksTotalCount} = (
+                await packAPI.getPacks(getState().pack.filter)
+            ).data;
+            dispatch(setPacksTotalCount(cardPacksTotalCount));
+            dispatch(setPacks(cardPacks));
+            dispatch(setPackStatus("loaded"));
+        } catch {
+            dispatch(setPackError("Could not Delete Pack"));
+        }
+    }
+}
+
 type PackThunkAction = ThunkAction<Promise<void>,
     StoreType,
     void,
     PackAction>;
 
 // Reducer State Type
-interface PackState {
+export interface PackState {
     status: PackStatus;
     filter: PackFilter;
     packs: IPack[];
@@ -90,7 +124,7 @@ interface PackState {
 const initialState: PackState = {
     status: "init",
     filter: { // Фильтр для поиска
-        pageCount: 15, // Кол-во паков на странице
+        pageCount: 10, // Кол-во паков на странице
         min: 0, // Мин. кол-во карт в паке
         max: 150, // Макс. кол-во карт в паке
         packName: "", // Название пака
@@ -139,6 +173,8 @@ export const packReducer = (state = initialState, action: PackAction): PackState
 
 // TYPES
 export type SortPacks =
+    | "0user_name"
+    | "1user_name"
     | "0updated"
     | "1updated"
     | "0name"

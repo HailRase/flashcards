@@ -1,0 +1,9 @@
+.container {
+    box-sizing: border-box;
+  margin: 24px auto auto;
+  width: 1000px;
+    min-height: 650px;
+    border: 1px solid black;
+    border-radius: 15px;
+    display: flex;
+}
