@@ -15,7 +15,7 @@ const Sidebar: FC = () => {
 
     const onSelect = (select: string) => {
         if (cards === "all" && select === "my") {
-            dispatch(fetchPacks({...filter, user_id: id}));
+            dispatch(fetchPacks({...filter, user_id: id, page: 1}));
         }
 
         if (cards === "my" && select === "all") {
