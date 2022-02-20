@@ -5,6 +5,7 @@
     box-shadow: 0 4px 14px rgba(45, 46, 70, 0.15);
     border-radius: 10px;
     margin: 0 48px;
+    margin-bottom: 24px;
 }
 
 .table > :last-child {
