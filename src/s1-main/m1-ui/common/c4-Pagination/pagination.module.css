@@ -1,5 +1,28 @@
 .container {
     box-sizing: border-box;
-    padding: 24px 48px;
+    padding: 0 48px;
+    margin-bottom: 24px;
     display: flex;
+    gap: 6px;
+}
+
+.button {
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    color: #2D2E46;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+
+.button:not(.button_active):not(:disabled):hover {
+    background: #F8F7FD;
+}
+
+.button_active {
+    background: #21268F;
+    color: #F2F5F7;
 }
