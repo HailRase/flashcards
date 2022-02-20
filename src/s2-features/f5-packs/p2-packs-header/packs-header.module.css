@@ -52,3 +52,6 @@
     cursor: pointer;
     width: 190px;
 }
+.button:active {
+    opacity: 0.8;
+}

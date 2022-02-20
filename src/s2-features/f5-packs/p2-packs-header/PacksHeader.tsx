@@ -5,9 +5,11 @@ import searchIcon from "../../../assets/search_icon.png";
 import {useDispatch, useSelector} from "react-redux";
 import {StoreType} from "../../../s1-main/m2-bll/store";
 import {createPack, fetchPacks, PackState} from "../../../s1-main/m2-bll/pack-reducer";
+import PackEditor from "../p4-pack-editor/PackEditor";
 
 const PacksHeader: FC = () => {
     const [searchValue, setSearchValue] = useState("");
+    const [modePackEditor, setModePackEditor] = useState(false)
     const {status, filter} = useSelector<StoreType, PackState>(state => state.pack);
     const dispatch = useDispatch();
 
@@ -23,8 +25,11 @@ const PacksHeader: FC = () => {
         setSearchValue(e.currentTarget.value);
     }
 
-    const createPackHandler = () => {
+    /*const createPackHandler = () => { // создание пака
         dispatch(createPack("Gachi Pack"));
+    }*/
+    const onChangePackMode = () => {
+        setModePackEditor(true)
     }
 
     return <div className={s.header}>
@@ -35,8 +40,9 @@ const PacksHeader: FC = () => {
                 <input className={s.input} type="text" value={searchValue} onChange={onSearchChange} name="search"
                        placeholder="Search..."/>
             </div>
-            <button className={s.button} onClick={createPackHandler}>Add New Pack</button>
+            <button className={s.button} onClick={onChangePackMode}>Add New Pack</button>
         </div>
+        {modePackEditor && <PackEditor modePackEditor={modePackEditor} setModePackEditor={setModePackEditor}/>}
     </div>
 }
 

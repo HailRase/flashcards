@@ -1,0 +1,96 @@
+.editorPackContainer {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay {
+    background: black;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    opacity: 0.6;
+}
+
+.editorContainer {
+    position: absolute;
+    width: 30%;
+    height: 35%;
+    background: #F9F9FE;
+    border-radius: 2px;
+}
+.editor {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.editorHeader {
+    display: flex;
+    width: 100%;
+    height: 20%;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px 10px 10px;
+    border-bottom: 1px solid #d7d6d6;
+}
+.editorHeader span {
+    margin: 0 15px 0 15px;
+    font-weight: 600;
+    font-size: 18px;
+}
+.editorBody {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.fieldLabel {
+    position: absolute;
+    top: 120px;
+    left: 8%;
+    z-index: 2;
+    color: rgb(138, 138, 138);
+    transition: 0.3s;
+}
+.fieldInput {
+    position: absolute;
+    top: 120px;
+    left: 8%;
+    width: 85%;
+    padding: 0 0 5px 0;
+    border: none;
+    border-bottom: 2px solid #c3c3c7;
+    background-color: transparent;
+    outline: none;
+    transition: 0.3s;
+    font-size: 20px;
+    z-index: 99;
+}
+.fieldInput:focus {
+    border-bottom: 2px solid #888686;
+}
+.fieldInput:focus ~ .fieldLabel,
+.fieldInput:not(:placeholder-shown) ~ .fieldLabel{
+    z-index: 0;
+    font-size: 12px;
+    top: 100px;
+}
+
+.editorFooter {
+    height: 30%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
