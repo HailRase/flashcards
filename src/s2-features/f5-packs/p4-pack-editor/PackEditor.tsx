@@ -16,6 +16,7 @@ const PackEditor: React.FC<PackEditorPropsType> = ({modePackEditor, setModePackE
     const dispatch = useDispatch()
     const createPackHandler = () => {
         dispatch(createPack(packName));
+        setModePackEditor(false)
         setPackName("")
     }
     const onChangePackMode = () => {
