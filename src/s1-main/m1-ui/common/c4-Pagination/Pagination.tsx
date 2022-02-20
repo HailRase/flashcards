@@ -2,6 +2,9 @@ import {FC, MouseEvent} from "react";
 
 import s from "./pagination.module.css"
 
+import arrowLeft from "../../../../assets/arrow_left_icon.png";
+import arrowRight from "../../../../assets/arrow_right_icon.png";
+
 interface Props {
     currentPage: number;
     maxPage: number;
@@ -75,12 +78,14 @@ const Pagination: FC<Props> = ({currentPage, maxPage, onChange, itemsPerPage}) =
     return <div className={s.container}>
         <button className={`${s.button} ${s.arrow}`}
                 disabled={currentPage === 1}
-                onClick={onPreviousPage}>Previous
+                onClick={onPreviousPage}>
+            <img src={arrowLeft} alt="left arrow"/>
         </button>
         {pageButtons}
         <button className={`${s.button} ${s.arrow}`}
                 disabled={currentPage === maxPage}
-                onClick={onNextPage}>Next
+                onClick={onNextPage}>
+            <img src={arrowRight} alt="right arrow"/>
         </button>
     </div>
 }
