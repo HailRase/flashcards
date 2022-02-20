@@ -10,7 +10,7 @@ interface Props {
 }
 
 const Pagination: FC<Props> = ({currentPage, maxPage, onChange, itemsPerPage}) => {
-    const numberOfButtons = maxPage > 5 ? 5 : maxPage;
+    const numberOfButtons = 5;
     const halvedNumOfButtons = Math.floor(numberOfButtons / 2);
 
 
@@ -21,7 +21,7 @@ const Pagination: FC<Props> = ({currentPage, maxPage, onChange, itemsPerPage}) =
 
     const onChangePage = (e: MouseEvent<HTMLButtonElement>) => {
         const page = +(e.currentTarget.dataset.page || 0);
-        page && onChange(page);
+        page !== currentPage && page && onChange(page);
     }
 
     const onNextPage = () => {
@@ -29,7 +29,7 @@ const Pagination: FC<Props> = ({currentPage, maxPage, onChange, itemsPerPage}) =
     }
 
     // Construct page buttons
-    const pageButtonIndexes: number[] = [];
+    let pageButtonIndexes: number[] = [];
 
     if (currentPage + halvedNumOfButtons > numberOfButtons) {
         // First Page Button
@@ -41,8 +41,8 @@ const Pagination: FC<Props> = ({currentPage, maxPage, onChange, itemsPerPage}) =
         for (let i = 1; i <= numberOfButtons && i <= maxPage; i++) {
             pageButtonIndexes.push(i);
         }
-    } else if(currentPage + halvedNumOfButtons >= maxPage) {
-        for(let i = currentPage - numberOfButtons; i <= maxPage; i++) {
+    } else if (currentPage + halvedNumOfButtons >= maxPage) {
+        for (let i = currentPage - numberOfButtons; i <= maxPage; i++) {
             pageButtonIndexes.push(i);
         }
     } else {
@@ -52,10 +52,18 @@ const Pagination: FC<Props> = ({currentPage, maxPage, onChange, itemsPerPage}) =
         }
     }
 
-    if(currentPage + halvedNumOfButtons < maxPage) {
+    if (currentPage + halvedNumOfButtons < maxPage) {
         // Last Page Button
         pageButtonIndexes.push(maxPage);
     }
+
+    if (maxPage < numberOfButtons) {
+        pageButtonIndexes = [];
+        for (let i = 1; i <= maxPage; i++) {
+            pageButtonIndexes.push(i)
+        }
+    }
+
     const pageButtons = pageButtonIndexes.map(index => {
         return (<button
             key={`page-button-${index}`}
