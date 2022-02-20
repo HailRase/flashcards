@@ -27,6 +27,14 @@ const TableSpinner = () => {
     return <img className={s.spinner} src={spinner} alt="loading spinner"/>
 }
 
+const formatStr = (str: string, maxLen: number) => {
+    if (str.length > 32) {
+        return str.substring(0, maxLen) + "...";
+    }
+
+    return str;
+}
+
 const PacksTable: FC = () => {
     const {filter, packs, status} = useSelector<StoreType, PackState>(state => state.pack)
     const id = useSelector<StoreType, string | undefined>(state => state.auth.userData?._id) || "";
@@ -40,10 +48,10 @@ const PacksTable: FC = () => {
 
     const Rows = status === "loaded" && packs.map((pack, i) => {
         return (<div key={pack._id} className={`${s.row} ${(i % 2) && s.dark}`}>
-            <div className={s.col_0}>{pack.name}</div>
+            <div className={s.col_0}>{formatStr(pack.name, 29)}</div>
             <div className={s.col_1}>{pack.cardsCount}</div>
             <div className={s.col_2}>{pack.updated.substring(0, 10)}</div>
-            <div className={s.col_3}>{pack.user_name}</div>
+            <div className={s.col_3}>{formatStr(pack.user_name, 29)}</div>
             <div className={s.col_4}>{pack.user_id === id && <>
                 <img src={deleteIcon}
                      alt="delete my pack"
