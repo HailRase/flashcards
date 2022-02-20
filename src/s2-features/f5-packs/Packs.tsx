@@ -36,10 +36,10 @@ const Packs: FC = () => {
         <main className={s.main}>
             <PacksHeader/>
             <PacksTable/>
-            <Pagination currentPage={filter.page}
-                        maxPage={maxPageNumber}
-                        onChange={onPageChange}
-                        itemsPerPage={itemsPerPage}/>
+            {maxPageNumber > 1 && <Pagination currentPage={filter.page}
+                         maxPage={maxPageNumber}
+                         onChange={onPageChange}
+                         itemsPerPage={itemsPerPage}/>}
         </main>
     </div>
 }
