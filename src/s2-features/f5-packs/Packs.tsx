@@ -9,7 +9,7 @@ import PacksHeader from "./p2-packs-header/PacksHeader";
 import PacksTable from "./p3-packs-table/PacksTable";
 
 import s from "./packs.module.css"
-import Pagination from "../../s1-main/m1-ui/common/c4-Pagintation/Pagination";
+import Pagination from "../../s1-main/m1-ui/common/c4-Pagination/Pagination";
 
 const Packs: FC = () => {
     const isAuth = useSelector<StoreType, boolean>(state => state.auth.isAuth);
