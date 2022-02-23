@@ -5,6 +5,7 @@
     align-items: center;
     height: 9vh;
     border-bottom: 1px solid rgba(59, 59, 98, 0.52);
+    background: #EBE0E9;
 }
 
 .headerNavigatorLeft {

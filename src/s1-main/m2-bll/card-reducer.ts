@@ -1,6 +1,8 @@
 import {cardAPI, GetCardsParams, ICard} from "../m3-dal/card";
 import {ThunkAction} from "redux-thunk";
 import {StoreType} from "./store";
+import {packAPI} from "../m3-dal/pack";
+import {setPackError, setPacks, setPackStatus, setPacksTotalCount} from "./pack-reducer";
 
 // Actions
 export const setCards = (cards: ICard[]) => {
@@ -73,18 +75,49 @@ export const fetchCards = (
             dispatch(setCards(cards));
             dispatch(setCardStatus("loaded"));
         } catch {
-            dispatch(setCardError("Could not Fetch Packs"));
+            dispatch(setCardError("Couldn't Fetch Cards"));
         }
     };
 };
-
+export const createCard = (cardsPack_id: string, question:string, answer: string): CardThunkAction => {
+    return async (dispatch, getState) => {
+        dispatch(setCardStatus("loading"));
+        try {
+            await cardAPI.createCard({cardsPack_id, question, answer});
+            const {cards, cardsTotalCount} = (
+                await cardAPI.getCards(getState().card.filter)
+            ).data;
+            dispatch(setCardsTotalCount(cardsTotalCount));
+            dispatch(setCards(cards));
+            dispatch(setCardStatus("loaded"));
+        } catch {
+            dispatch(setCardError("Could not Create Card"));
+        }
+    }
+}
+export const deleteCard = (id: string): CardThunkAction => {
+    return async (dispatch, getState) => {
+        dispatch(setCardStatus("loading"));
+        try {
+            await cardAPI.deleteCard(id);
+            const {cards, cardsTotalCount} = (
+                await cardAPI.getCards(getState().card.filter)
+            ).data;
+            dispatch(setCardsTotalCount(cardsTotalCount));
+            dispatch(setCards(cards));
+            dispatch(setCardStatus("loaded"));
+        } catch {
+            dispatch(setCardError("Could not Delete Pack"));
+        }
+    }
+}
 type CardThunkAction = ThunkAction<Promise<void>,
     StoreType,
     void,
     CardAction>;
 
 // Reducer State Type
-interface CardState {
+export interface CardState {
     status: CardStatus;
     filter: CardFilter;
     cards: ICard[];
@@ -99,10 +132,10 @@ const initialState: CardState = {
         cardsPack_id: "",
         cardQuestion: "",
         cardAnswer: "",
-        min: 1,
+        min: 0,
         max: 5,
         page: 1,
-        pageCount: 20,
+        pageCount: 6,
         sortCards: "0updated",
     },
     cards: [],
@@ -144,7 +177,7 @@ export const cardReducer = (state = initialState, action: CardAction): any => {
 }
 
 // Types
-type SortCards = "0updated" | "1updated" | "0grade" | "1grade";
+export type SortCards = "0updated" | "1updated" | "0grade" | "1grade";
 
 export interface CardFilter
     extends Required<Omit<GetCardsParams, "sortCards">> {

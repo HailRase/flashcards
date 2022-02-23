@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './Header.module.css'
-import {Navigate, NavLink} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {PATH} from "../routes/routes";
 import {useAppSelector} from "../../m2-bll/store";
 import {useDispatch} from "react-redux";

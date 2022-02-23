@@ -1,0 +1,39 @@
+.headerContainer {
+    width: 100%;
+    height: 20%;
+}
+.header {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 15px 0 15px;
+}
+.arrowBack {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.searchBlock{
+    display: flex;
+    align-items: center;
+}
+.search_container {
+    width: 100%;
+    background: #ECECF9;
+    border: 1px solid #635D80;
+    border-radius: 2px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.back {
+    border-radius: 30px;
+    border: none;
+    font-family: Consolas;
+    font-weight: 600;
+    font-size: 24px;
+    cursor: pointer;
+    background: none;
+}

@@ -11,4 +11,5 @@ export const PATH = {
     },
     E404: '*',
     PACKS: '/packs',
+    CARDS: '/cards/:packCardsId'
 }
