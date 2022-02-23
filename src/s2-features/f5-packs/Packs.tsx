@@ -30,16 +30,18 @@ const Packs: FC = () => {
 
     if (!isAuth) return <Navigate replace to={PATH.AUTH.LOGIN}/>
 
-    return <div className={s.container}>
-        <Sidebar/>
-        <main className={s.main}>
-            <PacksHeader/>
-            <PacksTable/>
-            {maxPageNumber > 1 && <Pagination currentPage={filter.page}
-                         maxPage={maxPageNumber}
-                         onChange={onPageChange}
-                         itemsPerPage={itemsPerPage}/>}
-        </main>
+    return <div className={s.packsContainer}>
+        <div className={s.packs}>
+            <Sidebar/>
+            <main className={s.main}>
+                <PacksHeader/>
+                <PacksTable/>
+                {maxPageNumber > 1 && <Pagination currentPage={filter.page}
+                                                  maxPage={maxPageNumber}
+                                                  onChange={onPageChange}
+                                                  itemsPerPage={itemsPerPage}/>}
+            </main>
+        </div>
     </div>
 }
 

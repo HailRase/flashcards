@@ -62,3 +62,63 @@
     width: 15%;
     text-align: center;
 }
+
+.icon {
+    width: 15px;
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+.icon_red {
+    filter: invert(39%) sepia(58%) saturate(5312%) hue-rotate(342deg) brightness(101%) contrast(84%);
+}
+
+.icon_blue {
+    filter: invert(16%) sepia(53%) saturate(3546%) hue-rotate(232deg) brightness(84%) contrast(106%);
+}
+/*grade*/
+.grade {
+    display: flex;
+    align-items: flex-end;
+    font-size: 15px;
+}
+.gradeBody{
+    position: relative;
+}
+.gradeBody::before{
+    content: "★★★★★";
+    display: block;
+}
+.activeGrade{
+    position: absolute;
+    width: 80%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+.activeGrade::before{
+    content: "★★★★★";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    color: goldenrod;
+}
+.gradeItems {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+.gradeItem {
+    flex: 0 0 20%;
+    height: 100%;
+    opacity: 0;
+}
+
+
+

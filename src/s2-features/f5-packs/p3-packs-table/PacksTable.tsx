@@ -10,6 +10,7 @@ import eyeIcon from "../../../assets/eye_icon.svg"
 import PacksTableHeader from "./PacksTableHeader";
 import {useNavigate} from "react-router-dom";
 import {setCardStatus} from "../../../s1-main/m2-bll/card-reducer";
+import {formatStr} from "../../../s3-utils/formatStrt";
 
 const EmptyRow = (i: number) => {
     return <div key={i} className={`${s.row} ${i % 2 && s.dark}`}>
@@ -24,15 +25,6 @@ const EmptyRow = (i: number) => {
 export const TableSpinner = () => {
     return <div className={s.spinnerContainer}><img className={s.spinner} src={spinner} alt="loading spinner"/></div>
 }
-
-const formatStr = (str: string, maxLen: number) => {
-    if (str.length > 32) {
-        return str.substring(0, maxLen) + "...";
-    }
-
-    return str;
-}
-
 const PacksTable: FC = () => {
     const {filter, packs, status} = useSelector<StoreType, PackState>(state => state.pack)
     const id = useSelector<StoreType, string | undefined>(state => state.auth.userData?._id) || "";

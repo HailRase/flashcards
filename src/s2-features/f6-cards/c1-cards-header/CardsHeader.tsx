@@ -4,26 +4,37 @@ import sph from './../../f5-packs/p2-packs-header/packs-header.module.css'
 import searchIcon from "../../../assets/search_icon.png";
 import {useNavigate, useParams} from "react-router-dom";
 import CardEditor from "../c4-card-editor/CardEditor";
-import {useAppSelector} from "../../../s1-main/m2-bll/store";
-import {useDispatch} from "react-redux";
+import {StoreType, useAppSelector} from "../../../s1-main/m2-bll/store";
+import {useDispatch, useSelector} from "react-redux";
 import {fetchCards} from "../../../s1-main/m2-bll/card-reducer";
+import {fetchPacks} from "../../../s1-main/m2-bll/pack-reducer";
 
 const CardsHeader = () => {
     const [searchValue, setSearchValue] = useState("");
     const [modeCardEditor, setModeCardEditor] = useState(false)
     const params = useParams()
     const dispatch = useDispatch()
+    const isAuth = useSelector<StoreType, boolean>(state => state.auth.isAuth);
     const pack = useAppSelector(state => state.pack.packs.find(p => p._id === params.packCardsId))
-    const {status, filter} = useAppSelector(state => state.card)
-    const navigate = useNavigate()
+    const id = useSelector<StoreType, string | undefined>(state => state.auth.userData?._id) || "";
+    const {status: cardsStatus, filter: cardsFilter} = useAppSelector(state => state.card)
+    const {status: packStatus, filter: packFilter} = useAppSelector(state => state.pack)
 
-    const storedSearchValue = filter.cardQuestion;
+    const navigate = useNavigate()
+    const storedSearchValue = cardsFilter.cardQuestion;
+
+    useEffect(() => {                            //возможно из-за этого запроса умирает кука
+        if (packStatus === "init" && isAuth) {
+            dispatch(fetchPacks(packFilter));
+        }
+    }, [dispatch, packFilter, packStatus, isAuth])
+
 
     useEffect(() => {
-        if (status === "loaded" && storedSearchValue !== searchValue) {
-            dispatch(fetchCards({...filter, cardQuestion: searchValue}));
+        if (cardsStatus === "loaded" && storedSearchValue !== searchValue) {
+            dispatch(fetchCards({...cardsFilter, cardQuestion: searchValue}));
         }
-    }, [dispatch, filter, status, searchValue])
+    }, [dispatch, cardsFilter, cardsStatus, searchValue])
 
     const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.currentTarget.value);
@@ -40,7 +51,7 @@ const CardsHeader = () => {
                 <div className={s.arrowBack}>
                     <label className={s.back} onClick={onPacksNavigate}>
                         &larr;
-                        {" " + pack?.name}
+                        {cardsStatus === "loaded" && " " + pack?.name}
                     </label>
                 </div>
                 <div className={s.searchBlock}>
@@ -51,7 +62,7 @@ const CardsHeader = () => {
                                onChange={onSearchChange}
                                placeholder="Search..."/>
                     </div>
-                    <button className={sph.button} onClick={onModeChange}>Add Card</button>
+                    {pack?.user_id ===id && <button style={{marginLeft: "15px"}} className={sph.button} onClick={onModeChange}>Add Card</button>}
                 </div>
             </div>
             {modeCardEditor && <CardEditor modeCardEditor={modeCardEditor} setModeCardEditor={setModeCardEditor}/>}

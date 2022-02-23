@@ -1,6 +1,8 @@
 import {cardAPI, GetCardsParams, ICard} from "../m3-dal/card";
 import {ThunkAction} from "redux-thunk";
 import {StoreType} from "./store";
+import {packAPI} from "../m3-dal/pack";
+import {setPackError, setPacks, setPackStatus, setPacksTotalCount} from "./pack-reducer";
 
 // Actions
 export const setCards = (cards: ICard[]) => {
@@ -93,7 +95,22 @@ export const createCard = (cardsPack_id: string, question:string, answer: string
         }
     }
 }
-
+export const deleteCard = (id: string): CardThunkAction => {
+    return async (dispatch, getState) => {
+        dispatch(setCardStatus("loading"));
+        try {
+            await cardAPI.deleteCard(id);
+            const {cards, cardsTotalCount} = (
+                await cardAPI.getCards(getState().card.filter)
+            ).data;
+            dispatch(setCardsTotalCount(cardsTotalCount));
+            dispatch(setCards(cards));
+            dispatch(setCardStatus("loaded"));
+        } catch {
+            dispatch(setCardError("Could not Delete Pack"));
+        }
+    }
+}
 type CardThunkAction = ThunkAction<Promise<void>,
     StoreType,
     void,
