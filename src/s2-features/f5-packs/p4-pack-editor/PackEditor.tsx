@@ -47,7 +47,6 @@ const PackEditor: React.FC<PackEditorPropsType> = ({modePackEditor, setModePackE
             </div>
         </div>
     );
-
 };
 
 export default PackEditor;

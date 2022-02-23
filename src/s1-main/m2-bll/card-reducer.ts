@@ -73,10 +73,26 @@ export const fetchCards = (
             dispatch(setCards(cards));
             dispatch(setCardStatus("loaded"));
         } catch {
-            dispatch(setCardError("Could not Fetch Packs"));
+            dispatch(setCardError("Couldn't Fetch Cards"));
         }
     };
 };
+export const createCard = (cardsPack_id: string, question:string, answer: string): CardThunkAction => {
+    return async (dispatch, getState) => {
+        dispatch(setCardStatus("loading"));
+        try {
+            await cardAPI.createCard({cardsPack_id, question, answer});
+            const {cards, cardsTotalCount} = (
+                await cardAPI.getCards(getState().card.filter)
+            ).data;
+            dispatch(setCardsTotalCount(cardsTotalCount));
+            dispatch(setCards(cards));
+            dispatch(setCardStatus("loaded"));
+        } catch {
+            dispatch(setCardError("Could not Create Card"));
+        }
+    }
+}
 
 type CardThunkAction = ThunkAction<Promise<void>,
     StoreType,
@@ -84,7 +100,7 @@ type CardThunkAction = ThunkAction<Promise<void>,
     CardAction>;
 
 // Reducer State Type
-interface CardState {
+export interface CardState {
     status: CardStatus;
     filter: CardFilter;
     cards: ICard[];
@@ -99,10 +115,10 @@ const initialState: CardState = {
         cardsPack_id: "",
         cardQuestion: "",
         cardAnswer: "",
-        min: 1,
+        min: 0,
         max: 5,
         page: 1,
-        pageCount: 20,
+        pageCount: 6,
         sortCards: "0updated",
     },
     cards: [],

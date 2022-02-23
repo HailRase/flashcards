@@ -1,19 +1,15 @@
 import {FC, MouseEvent} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {deletePack, PackState} from "../../../s1-main/m2-bll/pack-reducer";
-import {StoreType, useAppSelector} from "../../../s1-main/m2-bll/store";
-
-
+import {StoreType} from "../../../s1-main/m2-bll/store";
 import s from "./packs-table.module.css"
-
 import spinner from "../../../assets/spinner.gif";
 import deleteIcon from "../../../assets/delete_icon.svg";
 import editIcon from "../../../assets/edit_icon.svg";
 import eyeIcon from "../../../assets/eye_icon.svg"
-
 import PacksTableHeader from "./PacksTableHeader";
-import {fetchCards} from "../../../s1-main/m2-bll/card-reducer";
 import {useNavigate} from "react-router-dom";
+import {setCardStatus} from "../../../s1-main/m2-bll/card-reducer";
 
 const EmptyRow = (i: number) => {
     return <div key={i} className={`${s.row} ${i % 2 && s.dark}`}>
@@ -25,7 +21,7 @@ const EmptyRow = (i: number) => {
     </div>
 }
 
-const TableSpinner = () => {
+export const TableSpinner = () => {
     return <img className={s.spinner} src={spinner} alt="loading spinner"/>
 }
 
@@ -39,7 +35,6 @@ const formatStr = (str: string, maxLen: number) => {
 
 const PacksTable: FC = () => {
     const {filter, packs, status} = useSelector<StoreType, PackState>(state => state.pack)
-    //const {cardFilter} = useAppSelector( state => state.card.filter)
     const id = useSelector<StoreType, string | undefined>(state => state.auth.userData?._id) || "";
     const navigate = useNavigate()
     const dispatch = useDispatch();
@@ -49,14 +44,14 @@ const PacksTable: FC = () => {
     const deletePackHandler = (e: MouseEvent<HTMLImageElement>) => {
         dispatch(deletePack(e.currentTarget.dataset.id || ""))
     }
-    const loadPackCards = (cardsPack_id: string) => {
-      //dispatch(fetchCards())
+    const toPackCards = (cardsPack_id: string) => {
       navigate(`/cards/${cardsPack_id}`)
+        dispatch(setCardStatus("init"))
     }
     const Rows = status === "loaded" && packs.map((pack, i) => {
         return (
             <div key={pack._id} className={`${s.row} ${(i % 2) && s.dark}`}>
-                <div className={s.col_0}><span onClick={() => loadPackCards(pack._id)}>{formatStr(pack.name, 29)}</span></div>
+                <div className={s.col_0}><span onClick={() => toPackCards(pack._id)}>{formatStr(pack.name, 29)}</span></div>
                 <div className={s.col_1}>{pack.cardsCount}</div>
                 <div className={s.col_2}>{pack.updated.substring(0, 10)}</div>
                 <div className={s.col_3}>{formatStr(pack.user_name, 29)}</div>

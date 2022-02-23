@@ -7,7 +7,6 @@ import {StoreType} from "../../s1-main/m2-bll/store";
 import Sidebar from "./p1-sidebar/Sidebar";
 import PacksHeader from "./p2-packs-header/PacksHeader";
 import PacksTable from "./p3-packs-table/PacksTable";
-
 import s from "./packs.module.css"
 import Pagination from "../../s1-main/m1-ui/common/c4-Pagination/Pagination";
 

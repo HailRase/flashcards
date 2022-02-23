@@ -24,10 +24,6 @@ const PacksHeader: FC = () => {
     const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.currentTarget.value);
     }
-
-    /*const createPackHandler = () => { // создание пака
-        dispatch(createPack("Gachi Pack"));
-    }*/
     const onChangePackMode = () => {
         setModePackEditor(true)
     }

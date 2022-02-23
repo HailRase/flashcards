@@ -1,0 +1,63 @@
+.tableContainer {
+    height: 70%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table {
+    height: 100%;
+    width: 95%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    border-radius: 10px;
+}
+
+.row {
+    width: 100%;
+    height: 14%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: left;
+    flex-wrap: nowrap;
+    font-size: 13px;
+    line-height: 16px;
+    color: #2D2E46;
+    /* overflow: hidden; */
+}
+
+.dark {
+    background: #ECECF9;
+}
+.cardsTable {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.col_0 {
+    width: 30%;
+    text-align: left;
+    margin-left: 10px;
+}
+
+.col_1 {
+    width: 30%;
+    text-align: left;
+}
+.col_2 {
+    width: 15%;
+    text-align: left;
+}
+.col_3 {
+    width: 10%;
+    text-align: left;
+}
+.col_4 {
+    width: 15%;
+    text-align: left;
+}
