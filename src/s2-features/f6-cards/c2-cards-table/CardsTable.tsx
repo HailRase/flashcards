@@ -5,6 +5,7 @@ import {CardState, fetchCards} from "../../../s1-main/m2-bll/card-reducer";
 import s from './CardsTable.module.css'
 import CardsTableHeader from "./t1-cards-table-header/CardsTableHeader";
 import {useParams} from "react-router-dom";
+import {TableSpinner} from "../../f5-packs/p3-packs-table/PacksTable";
 
 const CardsTable = () => {
 
@@ -28,6 +29,13 @@ const CardsTable = () => {
             <div className={s.col_4}>action</div>
         </div>
     )
+
+    if (status !== "loaded") {
+        return <div className={s.table}>
+            <CardsTableHeader/>
+            <TableSpinner/>
+        </div>
+    }
 
     return (
         <div className={s.tableContainer}>

@@ -22,7 +22,7 @@ const EmptyRow = (i: number) => {
 }
 
 export const TableSpinner = () => {
-    return <img className={s.spinner} src={spinner} alt="loading spinner"/>
+    return <div className={s.spinnerContainer}><img className={s.spinner} src={spinner} alt="loading spinner"/></div>
 }
 
 const formatStr = (str: string, maxLen: number) => {
@@ -45,13 +45,14 @@ const PacksTable: FC = () => {
         dispatch(deletePack(e.currentTarget.dataset.id || ""))
     }
     const toPackCards = (cardsPack_id: string) => {
-      navigate(`/cards/${cardsPack_id}`)
+        navigate(`/cards/${cardsPack_id}`)
         dispatch(setCardStatus("init"))
     }
     const Rows = status === "loaded" && packs.map((pack, i) => {
         return (
             <div key={pack._id} className={`${s.row} ${(i % 2) && s.dark}`}>
-                <div className={s.col_0}><span onClick={() => toPackCards(pack._id)}>{formatStr(pack.name, 29)}</span></div>
+                <div className={s.col_0}><span onClick={() => toPackCards(pack._id)}>{formatStr(pack.name, 29)}</span>
+                </div>
                 <div className={s.col_1}>{pack.cardsCount}</div>
                 <div className={s.col_2}>{pack.updated.substring(0, 10)}</div>
                 <div className={s.col_3}>{formatStr(pack.user_name, 29)}</div>

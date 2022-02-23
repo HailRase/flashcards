@@ -29,10 +29,12 @@ const Cards = () => {
             <div className={s.cards}>
                 <CardsHeader/>
                 <CardsTable/>
-                {maxPageNumber > 1 && <Pagination currentPage={filter.page}
-                                                  maxPage={maxPageNumber}
-                                                  onChange={onPageChange}
-                                                  itemsPerPage={itemsPerPage}/>}
+                {maxPageNumber > 1 && <div className={s.paginationBlock}>
+                    <Pagination currentPage={filter.page}
+                                maxPage={maxPageNumber}
+                                onChange={onPageChange}
+                                itemsPerPage={itemsPerPage}/>
+                </div>}
             </div>
         </div>
     );

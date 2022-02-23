@@ -160,7 +160,7 @@ export const cardReducer = (state = initialState, action: CardAction): any => {
 }
 
 // Types
-type SortCards = "0updated" | "1updated" | "0grade" | "1grade";
+export type SortCards = "0updated" | "1updated" | "0grade" | "1grade";
 
 export interface CardFilter
     extends Required<Omit<GetCardsParams, "sortCards">> {

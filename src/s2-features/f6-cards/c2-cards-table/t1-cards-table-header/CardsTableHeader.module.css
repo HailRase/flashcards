@@ -14,7 +14,7 @@
 .col_0 {
     width: 30%;
     text-align: left;
-    margin-left: 10px;
+    margin-left: 30px;
 }
 
 .col_1 {
@@ -31,5 +31,24 @@
 }
 .col_4 {
     width: 15%;
-    text-align: left;
+    text-align: center;
+}
+
+.sort {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.sort:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.sort_icon {
+    transition: all 0.2s ease-out;
+}
+
+.sort_icon_upwards {
+    transform: rotate(180deg);
 }
