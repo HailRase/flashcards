@@ -58,7 +58,8 @@ const PacksTable: FC = () => {
 
                         <img src={editIcon} alt="edit my pack" className={`${s.icon} ${s.icon_blue}`}/>
                     </>}
-                    <img src={eyeIcon} alt="view cards" className={`${s.icon} ${s.icon_blue}`}/>
+                    <img src={eyeIcon} alt="view cards" className={`${s.icon} ${s.icon_blue}`}
+                         onClick={() => toPackCards(pack._id)}/>
                 </div>
             </div>)
     });
