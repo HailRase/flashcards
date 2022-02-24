@@ -12,5 +12,4 @@ export const PATH = {
     },
     E404: '*',
     PACKS: '/packs',
-    PACKSVAD: '/packsvad',
 }
