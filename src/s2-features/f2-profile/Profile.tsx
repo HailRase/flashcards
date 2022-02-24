@@ -13,36 +13,38 @@ import DoubleRange from "../../s1-main/m1-ui/common/DoubleRange/DoubleRange";
 const Profile = () => {
 
     useEffect(() => {
-        dispatch(fetchPacks({ ...filter, user_id: id, page: 1 }));
+        dispatch(fetchPacks({...filter, user_id: id, page: 1}));
     }, [])
 
-    const { userData, isAuth } = useAppSelector(state => state.auth)
+    const {userData, isAuth} = useAppSelector(state => state.auth)
     const dispatch = useDispatch();
     const id = useSelector<StoreType, string>(state => state.auth.userData?._id || "");
 
-    const { filter, packsTotal } = useSelector<StoreType, PackState>(state => state.pack);
+    const {filter, packsTotal} = useSelector<StoreType, PackState>(state => state.pack);
     const itemsPerPage = filter.pageCount;
     const maxPageNumber = Math.ceil(packsTotal / itemsPerPage);
 
     const onPageChange = (page: number) => {
-        dispatch(fetchPacks({ ...filter, page }))
+        dispatch(fetchPacks({...filter, page}))
     }
 
     if (!isAuth) {
-        return <Navigate to={'/login'} />
+        return <Navigate to={'/login'}/>
     }
 
     // userData?._id .name .email .avatar .publicCardPacksCount 
 
     return <div className={s.profileContainer}>
-        <ProfileSidebar />
-        <main className={s.main}>
-            <ProfileTable />
-            {maxPageNumber > 1 && <Pagination currentPage={filter.page}
-                maxPage={maxPageNumber}
-                onChange={onPageChange}
-                itemsPerPage={itemsPerPage} />}
-        </main>
+        <div className={s.profile}>
+            <ProfileSidebar/>
+            <main className={s.main}>
+                <ProfileTable/>
+                {maxPageNumber > 1 && <Pagination currentPage={filter.page}
+                                                  maxPage={maxPageNumber}
+                                                  onChange={onPageChange}
+                                                  itemsPerPage={itemsPerPage}/>}
+            </main>
+        </div>
     </div>
 };
 export default Profile;
@@ -67,15 +69,15 @@ const ProfileSidebar = () => {
     return (
         <div className={s.profileSidebarContainer}>
             <div className={s.profileInfo}>
-                <img src={avatar} />
+                <img src={avatar}/>
                 <div className={s.profileName}>{name}</div>
                 <div className={s.profileWork}>Front-end developer</div>
-                <button onClick={changeProfileHandler} >Edit profile</button> 
+                <button onClick={changeProfileHandler}>Edit profile</button>
             </div>
 
             <div className={''}>
                 <div className={s.title}>Number of cards</div>
-                <br />
+                <br/>
                 <DoubleRange min={1} max={150} onChange={value => 10}/>
             </div>
         </div>)
@@ -87,13 +89,14 @@ const ProfileTable = () => {
             <div className={s.profileHeaderContainer}>
                 <h2>My packs list</h2>
                 <div className={s.search_container}>
-                    <img src={searchIcon} />
-                    <input className={s.input} type="text" /*value={searchValue} onChange={onSearchChange}*/ name="search"
-                        placeholder="Search..." />
+                    <img src={searchIcon}/>
+                    <input className={s.input} type="text" /*value={searchValue} onChange={onSearchChange}*/
+                           name="search"
+                           placeholder="Search..."/>
                 </div>
             </div>
             <div>
-                <PacksTable />
+                <PacksTable/>
             </div>
         </div>)
 };
