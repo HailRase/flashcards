@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
-import { StoreType, useAppSelector } from "../../s1-main/m2-bll/store";
+import React, {useEffect} from 'react';
+import {StoreType, useAppSelector} from "../../s1-main/m2-bll/store";
 import searchIcon from "../../assets/search_icon.png";
 
 import s from './Profile.module.css'
 import PacksTable from '../f5-packs/p3-packs-table/PacksTable';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchPacks, PackFilter, PackState } from '../../s1-main/m2-bll/pack-reducer';
+import {useDispatch, useSelector} from 'react-redux';
+import {fetchPacks, PackState} from '../../s1-main/m2-bll/pack-reducer';
 import Pagination from '../../s1-main/m1-ui/common/c4-Pagination/Pagination';
-import { Navigate, useNavigate } from 'react-router-dom';
-import { editAuthUserData } from '../../s1-main/m2-bll/auth-reducer';
+import {Navigate, useNavigate} from 'react-router-dom';
+import DoubleRange from "../../s1-main/m1-ui/common/DoubleRange/DoubleRange";
 
 const Profile = () => {
 
@@ -76,7 +76,7 @@ const ProfileSidebar = () => {
             <div className={''}>
                 <div className={s.title}>Number of cards</div>
                 <br />
-                <span>4---------100</span>
+                <DoubleRange min={1} max={150} onChange={value => 10}/>
             </div>
         </div>)
 };
