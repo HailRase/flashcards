@@ -13,5 +13,8 @@ export const authAPI = {
   me() {
       return instance.post(`auth/me`)
   },
+  edit(name: string, avatar: string) {
+    return instance.put(`auth/me`, { name, avatar })
+  },
 
 }
