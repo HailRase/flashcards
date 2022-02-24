@@ -17,6 +17,8 @@ import PasswordRecovery from '../../s2-features/f3-password/p1-recovery/Password
 import ChangePassword from '../../s2-features/f3-password/p2-change/ChangePassword';
 import E404 from '../../s2-features/f4-E404/E404';
 import Packs from '../../s2-features/f5-packs/Packs';
+import Packsvad from '../../s2-features/f6-Vadyms-packs/PacksVAD';
+import EditProfile from '../../s2-features/f2-profile/EditProfile';
 
 const App = () => {
     const initialized = useAppSelector(state => state.app.initialized)
@@ -36,12 +38,13 @@ const App = () => {
                 <Route path={PATH.TEST} element={<Test/>}/>
                 <Route path={PATH.PROFILE} element={<Profile/>}/>
                 <Route path={PATH.PACKS} element={<Packs/>}/>
+                <Route path={PATH.PACKSVAD} element={<Packsvad/>}/>
                 <Route path={PATH.AUTH.LOGIN} element={<Login/>}/>
                 <Route path={PATH.AUTH.REGISTER} element={<Register/>}/>
                 <Route path={PATH.PASSWORD.RECOVERY} element={<PasswordRecovery/>}/>
                 <Route path={PATH.PASSWORD.CHANGE} element={<ChangePassword/>}/>
                 <Route path={PATH.E404} element={<E404/>}/>
-
+                <Route path={PATH.EDITPROFILE} element={<EditProfile/>}/>
             </Routes>
         </div>
     );

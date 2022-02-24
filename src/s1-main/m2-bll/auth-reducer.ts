@@ -1,9 +1,10 @@
-import {authAPI} from "../m3-dal/auth";
-import {Dispatch} from "redux";
-import {initializedSuccess, ThunkType} from "./app-reducer";
+import { authAPI } from "../m3-dal/auth";
+import { Dispatch } from "redux";
+import { initializedSuccess, ThunkType } from "./app-reducer";
 
 
-const SET_USER_DATA = "SET-USER-DATA"
+const SET_USER_DATA = "SET-USER-DATA";
+const SET_DISABLED = "SET_DISABLED";
 
 export type userDataType = {
     _id: string;
@@ -18,7 +19,9 @@ export type AuthType = typeof initialState;
 export type InitialStateType = {
     userData: userDataType | null
     isAuth: boolean
+    isDisabled: boolean
 }
+
 export const initialState: InitialStateType = {
     userData: {
         _id: '',
@@ -27,7 +30,8 @@ export const initialState: InitialStateType = {
         avatar: '',
         publicCardPacksCount: 0
     },
-    isAuth: false
+    isAuth: false,
+    isDisabled: false,
 };
 
 
@@ -40,18 +44,30 @@ export const authReducer = (state: AuthType = initialState, action: ActionAuthTy
                 isAuth: action.isAuth
             }
         }
+        case SET_DISABLED: {
+            return {
+                ...state,
+                isDisabled: action.isDisabled
+            }
+        }
         default:
             return state
     }
 }
-export const setUserData = (userData: userDataType|null, isAuth: boolean) => {
-        return {
-            type: SET_USER_DATA,
-            userData,
-            isAuth
-        } as const;
-    }
-;
+export const setUserData = (userData: userDataType | null, isAuth: boolean) => {
+    return {
+        type: SET_USER_DATA,
+        userData,
+        isAuth
+    } as const;
+};
+export const setDisabledButton = (isDisabled: boolean) => {
+    return {
+        type: SET_DISABLED,
+        isDisabled
+    } as const;
+};
+
 
 
 export const register = (email: string, password: string, repeatPassword: string) => () => {
@@ -65,7 +81,7 @@ export const register = (email: string, password: string, repeatPassword: string
         })
 }
 
-export const login = (email: string, password: string, rememberMe: boolean):ThunkType => (dispatch) => {
+export const login = (email: string, password: string, rememberMe: boolean): ThunkType => (dispatch) => {
     authAPI.Login(email, password, rememberMe)
         .then(response => {
             dispatch(getAuthUserData());
@@ -87,14 +103,24 @@ export const logout = () => (dispatch: Dispatch) => {
 }
 
 
-export const getAuthUserData = () =>  (dispatch: Dispatch) => {
+export const getAuthUserData = () => (dispatch: Dispatch) => {
     return authAPI.me()
         .then(response => {
             dispatch(setUserData(response.data, true))
         })
 }
 type setUserDataACType = ReturnType<typeof setUserData>
-type ActionAuthType = setUserDataACType
+type setDisabledButtonACType = ReturnType<typeof setDisabledButton>
+type ActionAuthType = setUserDataACType | setDisabledButtonACType
+
+export const editAuthUserData = (name: string, avatar: string) => (dispatch: Dispatch) => {
+    setDisabledButton(true)
+    return authAPI.edit(name, avatar)
+        .then(response => {
+            dispatch(setUserData(response.data.updatedUser, true));
+            setDisabledButton(false)
+        })
+}
 
 
 

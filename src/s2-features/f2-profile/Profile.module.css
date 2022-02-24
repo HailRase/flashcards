@@ -3,7 +3,7 @@
     padding: 0;
 }
 
-.container {
+.profileContainer {
     box-sizing: border-box;
     margin: 24px auto auto;
     width: 1000px;
@@ -13,7 +13,7 @@
     display: flex;
 }
 
-.profileSidebar {
+.profileSidebarContainer {
     box-sizing: border-box;
     background: #ECECF9;
     width: 240px;
@@ -41,6 +41,26 @@
     border-radius: 50%;
 }
 
+.profileInfo button {
+    height: 25px;
+    width: 85px;
+    padding: 5px 9px;
+    margin-top: 10px;
+    border: 1px solid #635D80;
+    box-sizing: border-box;
+    border-radius: 2px;
+    font-family: Inter, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    color: #21268F;
+    background: none;
+}
+
+.profileInfo button:hover {
+    background-color: #bfbfd3;
+}
+
 .profileName {
     font-family: Inter, sans-serif;
     font-style: normal;
@@ -50,6 +70,7 @@
     padding: 9px 0;
     text-align: left;
     color: #2D2E46;
+    padding-bottom: 5px;
 }
 
 .profileWork {
@@ -65,11 +86,9 @@
 .search_container {
     display: flex;
     width: 670px;
-    height: 28px;
+    height: 40px;
     gap: 24px;
     margin-top: 16px;
-    margin-left: 20px;
-    padding: 10px 14px;
     background: #ECECF9;
     opacity: 0.5;
     border: 1px solid #635D80;
@@ -77,9 +96,30 @@
     align-items: center;
 }
 
+.search_container img {
+    padding-left: 10px;
+}
+
 .input {
     background: none;
     border: none;
     outline: none;
     width: 100%;
+}
+
+.profileHeaderContainer {
+    margin: 0 48px;
+    margin-bottom: 24px;
+
+}
+
+.profileHeaderContainer h2 {
+    font-family: Inter, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 33px;
+    padding-top: 20px;
+    text-align: left;
+    color: #2D2E46;
 }
