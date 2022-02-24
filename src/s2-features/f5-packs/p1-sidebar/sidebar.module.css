@@ -1,4 +1,8 @@
 .sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     box-sizing: border-box;
     background: #ECECF9;
     padding: 24px;
@@ -12,12 +16,14 @@
     font-size: 16px;
     line-height: 19px;
     padding: 9px 0;
-    text-align: left;
+    text-align: center;
     color: #2D2E46;
 }
 
 .select_container {
     display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 12px;
     margin-bottom: 24px;
 }
@@ -36,11 +42,13 @@
     font-size: 14px;
     line-height: 17px;
     padding: 10px 30px;
-    width: 200px;
+    width: 50%;
     background: white;
 }
-
 .selected {
     background: #21268F;
     color: white;
+}
+.doubleRangeContainer {
+    text-align: center;
 }

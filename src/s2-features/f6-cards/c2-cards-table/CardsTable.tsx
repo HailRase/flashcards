@@ -9,6 +9,7 @@ import {TableSpinner} from "../../f5-packs/p3-packs-table/PacksTable";
 import deleteIcon from "../../../assets/delete_icon.svg";
 import editIcon from "../../../assets/edit_icon.svg";
 import {formatStr} from "../../../s3-utils/formatStrt";
+import eyeIcon from "../../../assets/eye_icon.svg";
 
 const CardsTable = () => {
 
@@ -27,14 +28,15 @@ const CardsTable = () => {
     const loadedCards = status === "loaded" && cards.map((c, i) =>
 
         <div key={c._id} className={`${s.row} ${i % 2 && s.dark}`}>
-            <div className={s.col_0}>{formatStr(c.question, 160)}</div>
-            <div className={s.col_1}>{formatStr(c.answer, 160)}</div>
+            <div className={s.col_0}>{formatStr(c.question, 140)}</div>
+            <div className={s.col_1}>{formatStr(c.answer, 140)}</div>
             <div className={s.col_2}>{c.updated.substring(0, 10)}</div>
             <div className={s.col_3}>
                 <div className={s.grade}>
                     <div className={s.gradeBody}>
                         <div className={s.gradeItems}>
-                            <div className={s.activeGrade} style={{width: `${c.grade*20}%`}}></div>
+                            <div className={s.activeGrade} style={{width: `${c.grade*20}%`}}>
+                            </div>
                             <input type="radio" name={'grade'} className={s.gradeItem}/>
                         </div>
                     </div>
@@ -50,6 +52,10 @@ const CardsTable = () => {
 
                     <img src={editIcon} alt="edit my pack" className={`${s.icon} ${s.icon_blue}`}/>
                 </>}
+                <img src={eyeIcon}
+                     alt="view cards"
+                     className={`${s.icon} ${s.icon_blue}`}
+                     onClick={() => {}}/>
             </div>
         </div>
     )
