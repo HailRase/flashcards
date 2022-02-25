@@ -1,11 +1,13 @@
 import React, { useCallback, useEffect, useState, useRef } from "react";
-import PropTypes from "prop-types";
 import s from './DoubleRange.module.css'
 
-type MultiRangeSliderPropsType = {
-    min: number
-    max: number
-    onChange: (value : {min: number,max:number}) => void
+export interface RangeValue {
+  min: number;
+  max: number;
+}
+
+interface MultiRangeSliderPropsType extends RangeValue{
+  onChange: (value : RangeValue) => void
 }
 
 const DoubleRange: React.FC<MultiRangeSliderPropsType> = ({ min, max, onChange }) => {
