@@ -6,25 +6,15 @@ import s from "./sidebar.module.css"
 import DoubleRange, {
     RangeValue
 } from "../../../s1-main/m1-ui/common/DoubleRange/DoubleRange";
+import usePackRange from "../../../s3-utils/usePackRange";
 
 const Sidebar: FC = () => {
     const id = useSelector<StoreType, string>(state => state.auth.userData?._id || "");
     const filter = useSelector<StoreType, PackFilter>(state => state.pack.filter);
-    const status = useSelector<StoreType, PackStatus>(state => state.pack.status);
     const dispatch = useDispatch();
 
-    // Local Range Logic
-    const [localRange, setLocalRange] = useState<RangeValue>({min: filter.min, max: filter.max});
+    const handleRangeChange = usePackRange();
 
-    useEffect(() => {
-        const {min, max} = localRange;
-        const updateFilter = (min !== filter.min) || (max !== filter.max);
-        if(updateFilter && status === "loaded") {
-            dispatch(fetchPacks({...filter, min, max}));
-        }
-    }, [filter, localRange, dispatch, status]);
-
-    // My/All Cards Logic
     const filterId = filter.user_id;
     const cards = id.length && id === filterId ? "my" : "all";
 
@@ -51,7 +41,7 @@ const Sidebar: FC = () => {
         </div>
         <div className={s.doubleRangeContainer}>
             <div className={s.title}>Number of cards</div>
-            <DoubleRange min={0} max={150} onChange={setLocalRange}/>
+            <DoubleRange min={0} max={150} onChange={handleRangeChange}/>
         </div>
 
     </aside>

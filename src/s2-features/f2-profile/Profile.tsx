@@ -16,6 +16,7 @@ import {Navigate, useNavigate} from 'react-router-dom';
 import DoubleRange, {
     RangeValue
 } from "../../s1-main/m1-ui/common/DoubleRange/DoubleRange";
+import usePackRange from "../../s3-utils/usePackRange";
 
 const Profile = () => {
 
@@ -62,7 +63,6 @@ const ProfileSidebar = () => {
 
     const avatar = useSelector<StoreType, string>(state => state.auth.userData?.avatar || fixedAvatar);
     const name = useSelector<StoreType, string>(state => state.auth.userData?.name || '');
-    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     // const changeProfileHandler1 = (name: string, avatar: string) => {
@@ -70,17 +70,8 @@ const ProfileSidebar = () => {
     // }
 
     // Local Range Logic
-    const filter = useSelector<StoreType, PackFilter>(state => state.pack.filter);
-    const status = useSelector<StoreType, PackStatus>(state => state.pack.status);
-    const [localRange, setLocalRange] = useState<RangeValue>({min: filter.min, max: filter.max});
+    const handleRangeChange = usePackRange();
 
-    useEffect(() => {
-        const {min, max} = localRange;
-        const updateFilter = (min !== filter.min) || (max !== filter.max);
-        if(updateFilter && status === "loaded") {
-            dispatch(fetchPacks({...filter, min, max}));
-        }
-    }, [filter, localRange, dispatch, status]);
 
     const changeProfileHandler = () => {
         navigate("/edit")
@@ -98,7 +89,7 @@ const ProfileSidebar = () => {
             <div className={''}>
                 <div className={s.title}>Number of cards</div>
                 <br/>
-                <DoubleRange min={0} max={150} onChange={setLocalRange}/>
+                <DoubleRange min={0} max={150} onChange={handleRangeChange}/>
             </div>
         </div>)
 };
