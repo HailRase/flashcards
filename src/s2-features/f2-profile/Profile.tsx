@@ -1,14 +1,21 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StoreType, useAppSelector} from "../../s1-main/m2-bll/store";
 import searchIcon from "../../assets/search_icon.png";
 
 import s from './Profile.module.css'
 import PacksTable from '../f5-packs/p3-packs-table/PacksTable';
 import {useDispatch, useSelector} from 'react-redux';
-import {fetchPacks, PackState} from '../../s1-main/m2-bll/pack-reducer';
+import {
+    fetchPacks,
+    PackFilter,
+    PackState,
+    PackStatus
+} from '../../s1-main/m2-bll/pack-reducer';
 import Pagination from '../../s1-main/m1-ui/common/c4-Pagination/Pagination';
 import {Navigate, useNavigate} from 'react-router-dom';
-import DoubleRange from "../../s1-main/m1-ui/common/DoubleRange/DoubleRange";
+import DoubleRange, {
+    RangeValue
+} from "../../s1-main/m1-ui/common/DoubleRange/DoubleRange";
 
 const Profile = () => {
 
@@ -62,6 +69,19 @@ const ProfileSidebar = () => {
     //     dispatch(editAuthUserData(name, avatar))
     // }
 
+    // Local Range Logic
+    const filter = useSelector<StoreType, PackFilter>(state => state.pack.filter);
+    const status = useSelector<StoreType, PackStatus>(state => state.pack.status);
+    const [localRange, setLocalRange] = useState<RangeValue>({min: filter.min, max: filter.max});
+
+    useEffect(() => {
+        const {min, max} = localRange;
+        const updateFilter = (min !== filter.min) || (max !== filter.max);
+        if(updateFilter && status === "loaded") {
+            dispatch(fetchPacks({...filter, min, max}));
+        }
+    }, [filter, localRange, dispatch, status]);
+
     const changeProfileHandler = () => {
         navigate("/edit")
     }
@@ -78,7 +98,7 @@ const ProfileSidebar = () => {
             <div className={''}>
                 <div className={s.title}>Number of cards</div>
                 <br/>
-                <DoubleRange min={1} max={150} onChange={value => 10}/>
+                <DoubleRange min={0} max={150} onChange={setLocalRange}/>
             </div>
         </div>)
 };
