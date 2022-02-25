@@ -8,6 +8,7 @@ import {StoreType, useAppSelector} from "../../../s1-main/m2-bll/store";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchCards} from "../../../s1-main/m2-bll/card-reducer";
 import {fetchPacks} from "../../../s1-main/m2-bll/pack-reducer";
+import Modal from "../../../s1-main/m1-ui/common/Modal/Modal";
 
 const CardsHeader = () => {
     const [searchValue, setSearchValue] = useState("");
@@ -45,6 +46,11 @@ const CardsHeader = () => {
     const onModeChange = () => {
         setModeCardEditor(true)
     }
+
+    const handleModalClose = () => {
+        setModeCardEditor(false);
+    }
+
     return (
         <div className={s.headerContainer}>
             <div className={s.header}>
@@ -65,7 +71,9 @@ const CardsHeader = () => {
                     {pack?.user_id ===id && <button style={{marginLeft: "15px"}} className={sph.button} onClick={onModeChange}>Add Card</button>}
                 </div>
             </div>
-            {modeCardEditor && <CardEditor modeCardEditor={modeCardEditor} setModeCardEditor={setModeCardEditor}/>}
+            <Modal active={modeCardEditor} onClose={handleModalClose}>
+                <CardEditor onClose={handleModalClose} />
+            </Modal>
         </div>
     );
 };

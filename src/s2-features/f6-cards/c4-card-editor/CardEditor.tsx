@@ -6,11 +6,10 @@ import {createCard, fetchCards, setCardStatus} from "../../../s1-main/m2-bll/car
 import {useParams} from "react-router-dom";
 
 type CardEditorPropsType = {
-    modeCardEditor: boolean
-    setModeCardEditor: (value: boolean) => void
+    onClose: () => void;
 }
 
-const CardEditor: React.FC<CardEditorPropsType> = ({modeCardEditor, setModeCardEditor}) => {
+const CardEditor: React.FC<CardEditorPropsType> = ({onClose}) => {
     const params = useParams()
     const [question, setQuestion] = useState("")
     const [answer, setAnswer] = useState("")
@@ -20,11 +19,11 @@ const CardEditor: React.FC<CardEditorPropsType> = ({modeCardEditor, setModeCardE
             dispatch(createCard(params.packCardsId, question, answer));
             dispatch(setCardStatus("loading"))
         }
-        setModeCardEditor(false)
+        onClose();
         setQuestion("")
     }
     const onChangePackMode = () => {
-        setModeCardEditor(false)
+        onClose();
     }
     const onChangeCardQuestion = (e: ChangeEvent<HTMLInputElement>) => {
         setQuestion(e.currentTarget.value)
@@ -34,31 +33,28 @@ const CardEditor: React.FC<CardEditorPropsType> = ({modeCardEditor, setModeCardE
     }
 
     return (
-        <div className={s.editorCardContainer}>
-            <div className={s.overlay}></div>
-            <div className={s.editorContainer}>
-                <div className={s.editor}>
-                    <div className={s.editorHeader}>
-                        <span>Add New Card</span>
-                    </div>
-                    <div className={s.editorBody}>
-                        <div className={s.cardField} style={{top: "120px"}}>
-                            <input className={`${s.fieldInput}`} value={question} placeholder={" "} type="text"
-                                   onChange={onChangeCardQuestion}/>
-                            <label className={`${s.fieldLabel}`}>Question</label>
-                        </div>
-                        <div className={s.cardField} style={{top: "260px"}}>
-                            <input className={`${s.fieldInput}`} value={answer} placeholder={" "} type="text"
-                                   onChange={onChangeCardAnswer}/>
-                            <label className={`${s.fieldLabel}`}>Answer</label>
-                        </div>
-                    </div>
-                    <div className={s.editorFooter}>
-                        <button className={sph.button} onClick={createPackHandler}>Add</button>
-                        <button className={sph.button} onClick={onChangePackMode}>Cancel</button>
-                    </div>
-                </div>
-            </div>
+        <div className={s.editorContainer}>
+          <div className={s.editor}>
+              <div className={s.editorHeader}>
+                  <span>Add New Card</span>
+              </div>
+              <div className={s.editorBody}>
+                  <div className={s.cardField} style={{top: "120px"}}>
+                      <input className={`${s.fieldInput}`} value={question} placeholder={"Question"} type="text"
+                             onChange={onChangeCardQuestion}/>
+                      {/*<label className={`${s.fieldLabel}`}>Question</label>*/}
+                  </div>
+                  <div className={s.cardField} style={{top: "260px"}}>
+                      <input className={`${s.fieldInput}`} value={answer} placeholder={"Answer"} type="text"
+                             onChange={onChangeCardAnswer}/>
+                      {/*<label className={`${s.fieldLabel}`}>Answer</label>*/}
+                  </div>
+              </div>
+              <div className={s.editorFooter}>
+                  <button className={sph.button} onClick={createPackHandler}>Add</button>
+                  <button className={sph.button} onClick={onChangePackMode}>Cancel</button>
+              </div>
+          </div>
         </div>
     );
 };
