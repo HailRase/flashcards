@@ -4,8 +4,9 @@ import s from "./packs-header.module.css"
 import searchIcon from "../../../assets/search_icon.png";
 import {useDispatch, useSelector} from "react-redux";
 import {StoreType} from "../../../s1-main/m2-bll/store";
-import {createPack, fetchPacks, PackState} from "../../../s1-main/m2-bll/pack-reducer";
+import {fetchPacks, PackState} from "../../../s1-main/m2-bll/pack-reducer";
 import PackEditor from "../p4-pack-editor/PackEditor";
+import Modal from "../../../s1-main/m1-ui/common/Modal/Modal";
 
 const PacksHeader: FC = () => {
     const [searchValue, setSearchValue] = useState("");
@@ -13,9 +14,9 @@ const PacksHeader: FC = () => {
     const {status, filter} = useSelector<StoreType, PackState>(state => state.pack);
     const dispatch = useDispatch();
 
-    const storedSearchValue = filter.packName;
 
     useEffect(() => {
+        const storedSearchValue = filter.packName;
         if (status === "loaded" && storedSearchValue !== searchValue) {
             dispatch(fetchPacks({...filter, packName: searchValue}));
         }
@@ -24,8 +25,12 @@ const PacksHeader: FC = () => {
     const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.currentTarget.value);
     }
-    const onChangePackMode = () => {
+    const handleModalOpen = () => {
         setModePackEditor(true)
+    }
+
+    const handleModalClose = () => {
+        setModePackEditor(false);
     }
 
     return <div className={s.header}>
@@ -36,9 +41,11 @@ const PacksHeader: FC = () => {
                 <input className={s.input} type="text" value={searchValue} onChange={onSearchChange} name="search"
                        placeholder="Search..."/>
             </div>
-            <button className={s.button} onClick={onChangePackMode}>Add New Pack</button>
+            <button className={s.button} onClick={handleModalOpen}>Add New Pack</button>
         </div>
-        {modePackEditor && <PackEditor modePackEditor={modePackEditor} setModePackEditor={setModePackEditor}/>}
+        <Modal active={modePackEditor} onClose={handleModalClose}>
+            <PackEditor onClose={handleModalClose}/>
+        </Modal>
     </div>
 }
 
