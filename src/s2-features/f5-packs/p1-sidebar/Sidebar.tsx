@@ -1,17 +1,23 @@
-import {FC} from "react";
+import {FC, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchPacks, PackFilter} from "../../../s1-main/m2-bll/pack-reducer";
+import {fetchPacks, PackFilter, PackStatus} from "../../../s1-main/m2-bll/pack-reducer";
 import {StoreType} from "../../../s1-main/m2-bll/store";
 import s from "./sidebar.module.css"
-import DoubleRange from "../../../s1-main/m1-ui/common/DoubleRange/DoubleRange";
+import DoubleRange, {
+    RangeValue
+} from "../../../s1-main/m1-ui/common/DoubleRange/DoubleRange";
+import usePackRange from "../../../s3-utils/usePackRange";
 
 const Sidebar: FC = () => {
     const id = useSelector<StoreType, string>(state => state.auth.userData?._id || "");
     const filter = useSelector<StoreType, PackFilter>(state => state.pack.filter);
     const dispatch = useDispatch();
 
+    const handleRangeChange = usePackRange();
+
     const filterId = filter.user_id;
     const cards = id.length && id === filterId ? "my" : "all";
+
 
     const onSelect = (select: string) => {
         if (cards === "all" && select === "my") {
@@ -35,7 +41,7 @@ const Sidebar: FC = () => {
         </div>
         <div className={s.doubleRangeContainer}>
             <div className={s.title}>Number of cards</div>
-            <DoubleRange min={1} max={150} onChange={value => 10}/>
+            <DoubleRange min={0} max={150} onChange={handleRangeChange}/>
         </div>
 
     </aside>
