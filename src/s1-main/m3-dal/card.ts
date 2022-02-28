@@ -46,6 +46,10 @@ export const cardAPI = {
             params,
         });
     },
+
+    updateGrade(grade: number, card_id: string){
+        return instance.put<DeleteCardResponse>('/cards/grade', {grade, card_id});
+    }
 };
 
 // Common Response data

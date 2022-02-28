@@ -40,6 +40,10 @@ const PacksTable: FC = () => {
         navigate(`/cards/${cardsPack_id}`)
         dispatch(setCardStatus("init"))
     }
+    const toLearnPage = (cardsPack_id: string) => {
+        navigate(`/packs/${cardsPack_id}`)
+        dispatch(setCardStatus("init"))
+    }
     const Rows = status === "loaded" && packs.map((pack, i) => {
         return (
             <div key={pack._id} className={`${s.row} ${(i % 2) && s.dark}`}>
@@ -59,7 +63,7 @@ const PacksTable: FC = () => {
                         <img src={editIcon} alt="edit my pack" className={`${s.icon} ${s.icon_blue}`}/>
                     </>}
                     <img src={eyeIcon} alt="view cards" className={`${s.icon} ${s.icon_blue}`}
-                         onClick={() => toPackCards(pack._id)}/>
+                         onClick={() => toLearnPage(pack._id)}/>
                 </div>
             </div>)
     });

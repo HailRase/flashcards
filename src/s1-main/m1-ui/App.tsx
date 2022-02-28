@@ -19,6 +19,7 @@ import E404 from '../../s2-features/f4-E404/E404';
 import Packs from '../../s2-features/f5-packs/Packs';
 import Cards from "../../s2-features/f6-cards/Cards";
 import EditProfile from "../../s2-features/f2-profile/EditProfile";
+import LearnPage from "../../s2-features/f6-cards/c3-learn-page/LearnPage";
 
 const App = () => {
     const initialized = useAppSelector(state => state.app.initialized)
@@ -37,7 +38,8 @@ const App = () => {
                 <Route path='/' element={<Navigate to={PATH.PROFILE}/>}/>
                 <Route path={PATH.TEST} element={<Test/>}/>
                 <Route path={PATH.PROFILE} element={<Profile/>}/>
-                <Route path={PATH.PACKS} element={<Packs/>}/>
+                <Route path={PATH.PACKS.APP} element={<Packs/>}/>
+                <Route path={PATH.PACKS.LEARN} element={<LearnPage/>}/>
                 <Route path={PATH.CARDS} element={<Cards/>}/>
                 <Route path={PATH.AUTH.LOGIN} element={<Login/>}/>
                 <Route path={PATH.AUTH.REGISTER} element={<Register/>}/>
