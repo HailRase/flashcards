@@ -6,7 +6,7 @@ import s from "./packs-table.module.css"
 import spinner from "../../../assets/spinner.gif";
 import deleteIcon from "../../../assets/delete_icon.svg";
 import editIcon from "../../../assets/edit_icon.svg";
-import eyeIcon from "../../../assets/eye_icon.svg"
+import learn from "../../../assets/open-book.png"
 import PacksTableHeader from "./PacksTableHeader";
 import {useNavigate} from "react-router-dom";
 import {setCardStatus} from "../../../s1-main/m2-bll/card-reducer";
@@ -62,7 +62,7 @@ const PacksTable: FC = () => {
 
                         <img src={editIcon} alt="edit my pack" className={`${s.icon} ${s.icon_blue}`}/>
                     </>}
-                    <img src={eyeIcon} alt="view cards" className={`${s.icon} ${s.icon_blue}`}
+                    <img src={learn} alt="view cards" className={`${s.icon} ${s.icon_blue}`}
                          onClick={() => toLearnPage(pack._id)}/>
                 </div>
             </div>)

@@ -1,39 +1,100 @@
-.cardFlipperContainer {
-    width: 300px;
-    height: 400px;
-    margin: 50px auto;
-    background-color: #8a8a8a;
-    perspective: 1000px;
-}
+.cardContainer {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-.cardFlipper{
-    transform: rotateY(180deg);
 }
-.cardFlipper {
-    position: relative;
-    transform-style: preserve-3d;
-    transition: 0.5s;
+.card {
+    min-height: 15%;
+    width: 40%;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
-.back {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: rotateY(180deg);
+.questionContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
 }
+.question {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.questionTitle {
+    font-size: 20px;
+    font-weight: 600;
+}
+.questionBody{
+    font-size: 16px;
+    font-weight: 500;
 
-
-.front, .back {
-    border: 4px solid black;
-    width: 300px;
-    height: 400px;
-    background-color: goldenrod;
-    backface-visibility: hidden;
 }
-
-.front{
-    vertical-align: middle;
+span {
+    display: inline-block;
+    margin: 10px;
 }
-.back {
-    background-color: #635D80;
+.answerContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 10px;
+    width: 100%;
 }
-
+.answer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.grades {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.gradeButton {
+    border: 3px solid rgba(240, 201, 253, 0.73);
+    min-width: 15%;
+    border-radius: 5px;
+    font-weight: 500;
+    font-family: Consolas;
+    font-size: 20px;
+    margin: 5px;
+    cursor: pointer;
+    padding: 3px;
+    flex-wrap: wrap;
+}
+.gradeButton:active {
+    border: 3px solid rgba(210, 136, 243, 0.73);
+    background-color: white;
+}
+.cardCommonButton {
+    border: none;
+    border-radius: 5px;
+    padding: 3px 10px;
+    cursor: pointer;
+    background: #21268F;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+}
+.cardCommonButton:active {
+    opacity: 0.7;
+}
+.cardCommonButton:hover {
+    box-shadow: 0 0 5px rgba(0,0,0,0.8);
+}

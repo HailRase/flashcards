@@ -70,8 +70,9 @@ export const fetchCards = (
     return async (dispatch) => {
         dispatch(setCardStatus("loading"));
         dispatch(setCardFilter(filter));
+        console.log(filter.cardsPack_id)
 
-        if (!filter.cardsPack_id.length) return;
+        if (!filter.cardsPack_id?.length) return;
 
         try {
             const {cards, cardsTotalCount} = (

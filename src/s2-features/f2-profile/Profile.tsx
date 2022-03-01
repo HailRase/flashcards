@@ -17,6 +17,7 @@ import DoubleRange, {
     RangeValue
 } from "../../s1-main/m1-ui/common/DoubleRange/DoubleRange";
 import usePackRange from "../../s3-utils/usePackRange";
+import {PATH} from "../../s1-main/m1-ui/routes/routes";
 
 const Profile = () => {
 
@@ -36,11 +37,7 @@ const Profile = () => {
         dispatch(fetchPacks({...filter, page}))
     }
 
-    if (!isAuth) {
-        return <Navigate to={'/login'}/>
-    }
-
-    // userData?._id .name .email .avatar .publicCardPacksCount 
+    if (!isAuth) return <Navigate replace to={PATH.AUTH.LOGIN}/>
 
     return <div className={s.profileContainer}>
         <div className={s.profile}>
