@@ -11,6 +11,9 @@ export const PATH = {
         CHANGE: '/change/:resetPasswordToken'
     },
     E404: '*',
-    PACKS: '/packs',
+    PACKS: {
+        APP:'/packs',
+        LEARN:'/packs/:learnPackId'
+    },
     CARDS: '/cards/:packCardsId'
 }

@@ -20,7 +20,7 @@ const Header = () => {
                 <span className={s.logo}>Flashcards</span>
                 <nav className={s.navLinks}>
                     <NavLink to={PATH.PROFILE} className={s.navLink}>Profile</NavLink>
-                    <NavLink to={PATH.PACKS} className={s.navLink}>Packs</NavLink>
+                    <NavLink to={PATH.PACKS.APP} className={s.navLink}>Packs</NavLink>
                 </nav>
             </div>
             <div className={s.headerNavigatorRight}>

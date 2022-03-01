@@ -1,8 +1,6 @@
 import {cardAPI, GetCardsParams, ICard} from "../m3-dal/card";
 import {ThunkAction} from "redux-thunk";
 import {StoreType} from "./store";
-import {packAPI} from "../m3-dal/pack";
-import {setPackError, setPacks, setPackStatus, setPacksTotalCount} from "./pack-reducer";
 
 // Actions
 export const setCards = (cards: ICard[]) => {
@@ -47,6 +45,14 @@ export const setCardFilter = (filter: CardFilter) => {
         filter,
     } as const;
 }
+type SetCardGrade = ReturnType<typeof setCardGrade>
+export const setCardGrade = (grade: number, card_id: string) => {
+    return {
+        type: "CARD/SET_GRADE",
+        grade,
+        card_id
+    } as const;
+}
 
 type SetCardFilter = ReturnType<typeof setCardFilter>;
 
@@ -64,8 +70,9 @@ export const fetchCards = (
     return async (dispatch) => {
         dispatch(setCardStatus("loading"));
         dispatch(setCardFilter(filter));
+        console.log(filter.cardsPack_id)
 
-        if (!filter.cardsPack_id.length) return;
+        if (!filter.cardsPack_id?.length) return;
 
         try {
             const {cards, cardsTotalCount} = (
@@ -108,6 +115,18 @@ export const deleteCard = (id: string): CardThunkAction => {
             dispatch(setCardStatus("loaded"));
         } catch {
             dispatch(setCardError("Could not Delete Pack"));
+        }
+    }
+}
+
+export const gradeCard = (grade: number, card_id: string): CardThunkAction => {
+    return async (dispatch) => {
+        dispatch(setCardStatus("loading"));
+        try {
+            await cardAPI.updateGrade(grade, card_id);
+            dispatch(setCardStatus("loaded"));
+        } catch {
+            dispatch(setCardError("Couldn't grade card"));
         }
     }
 }
