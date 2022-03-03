@@ -1,4 +1,4 @@
-import {FC, MouseEvent} from "react";
+import {FC, MouseEvent, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {deletePack, PackState} from "../../../s1-main/m2-bll/pack-reducer";
 import {StoreType} from "../../../s1-main/m2-bll/store";
@@ -11,6 +11,7 @@ import PacksTableHeader from "./PacksTableHeader";
 import {useNavigate} from "react-router-dom";
 import {setCardStatus} from "../../../s1-main/m2-bll/card-reducer";
 import {formatStr} from "../../../s3-utils/formatStrt";
+import PopUp from "../../../s1-main/m1-ui/common/c5-PopUp/PopUp";
 
 const EmptyRow = (i: number) => {
     return <div key={i} className={`${s.row} ${i % 2 && s.dark}`}>
@@ -26,6 +27,11 @@ export const TableSpinner = () => {
     return <div className={s.spinnerContainer}><img className={s.spinner} src={spinner} alt="loading spinner"/></div>
 }
 const PacksTable: FC = () => {
+    const [popupVisible, setPopupVisible] = useState<boolean>(false)
+    const [pack, setPack] = useState({
+        packId: '',
+        packName: ''
+    })
     const {filter, packs, status} = useSelector<StoreType, PackState>(state => state.pack)
     const id = useSelector<StoreType, string | undefined>(state => state.auth.userData?._id) || "";
     const navigate = useNavigate()
@@ -33,9 +39,10 @@ const PacksTable: FC = () => {
 
     const {pageCount} = filter;
 
-    const deletePackHandler = (e: MouseEvent<HTMLImageElement>) => {
-        dispatch(deletePack(e.currentTarget.dataset.id || ""))
-    }
+     const onDeletePackHandler = (packId: string) => {
+         dispatch(deletePack(packId || ""))
+         setPopupVisible(false)
+     }
     const toPackCards = (cardsPack_id: string) => {
         navigate(`/cards/${cardsPack_id}`)
         dispatch(setCardStatus("init"))
@@ -43,6 +50,10 @@ const PacksTable: FC = () => {
     const toLearnPage = (cardsPack_id: string) => {
         navigate(`/packs/${cardsPack_id}`)
         dispatch(setCardStatus("init"))
+    }
+    const onDeletePopupHandler = (pack: { packId: string, packName: string }) => {
+        setPopupVisible(true)
+        setPack(pack)
     }
     const Rows = status === "loaded" && packs.map((pack, i) => {
         return (
@@ -57,10 +68,11 @@ const PacksTable: FC = () => {
                         <img src={deleteIcon}
                              alt="delete my pack"
                              data-id={pack._id}
-                             onClick={deletePackHandler}
+                             onClick={() => onDeletePopupHandler({packId: pack._id, packName: pack.name})}
                              className={`${s.icon} ${s.icon_red}`}/>
 
-                        <img src={editIcon} alt="edit my pack" className={`${s.icon} ${s.icon_blue}`}/>
+                        <img onClick={() => {}} src={editIcon} alt="edit my pack"
+                             className={`${s.icon} ${s.icon_blue}`}/>
                     </>}
                     <img src={learn} alt="view cards" className={`${s.icon} ${s.icon_blue}`}
                          onClick={() => toLearnPage(pack._id)}/>
@@ -93,6 +105,13 @@ const PacksTable: FC = () => {
         <PacksTableHeader/>
         {Rows}
         {EmptyRows}
+        {popupVisible && <PopUp active={popupVisible} setActive={setPopupVisible} title={'Delete pack'}>
+            <span className={s.deletePack}>
+                Do you really want to <b>remove {pack.packName}</b>?
+                All cards will be excluded from this course.
+            </span>
+            <button onClick={() => onDeletePackHandler(pack.packId)} className={s.deleteButton}>Delete</button>
+        </PopUp>}
     </div>
 }
 

@@ -1,11 +1,16 @@
+.headerNavigatorContainer{
+    width: 100%;
+    background: #EBE0E9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .headerNavigator {
     display: flex;
     justify-content: space-between;
-    padding: 0 20px 0 20px;
     align-items: center;
     height: 9vh;
-    border-bottom: 1px solid rgba(59, 59, 98, 0.52);
-    background: #EBE0E9;
+    width: 70%;
 }
 
 .headerNavigatorLeft {
@@ -30,41 +35,37 @@
     height: 100%;
 }
 
-.navLinks a {
+.navLink {
     display: flex;
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    background: linear-gradient(#203bff, #203bff) 50% 100% no-repeat;
-    background-size: 0 3px;
-    transition: background 250ms ease 0s;
-    font-weight: bold;
+    font-weight: 500;
+    font-family: inherit;
+    font-size: 16px;
     color: black;
     height: 100%;
     padding: 0 20px 0 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
 }
-
-.navLinks a:hover {
-    background-size: 100% 5px;
+.navLink:hover {
+    background: #DCCCDB;
 }
-
-
 .logo {
-    font-family: "Segoe UI Black";
+    font-family: Poppins;
     display: block;
     font-size: 26px;
-    font-weight: bold;
-    color: #203bff;
+    font-weight: 600;
+    color: black;
 }
-.buttonLogout{
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 16px;
-    padding: 0.375rem 0.75rem;
-    cursor: pointer;
-    background-color: #ffcd1f;
+.active {
+    background-color: #DCCCDB;
+    border-bottom: 3px solid #21268f;
 }
-.buttonLogout:active {
-    background: #ffedab;
+.image {
+    height: 40%;
+    width: 40%;
+    margin-right: 5px;
 }
