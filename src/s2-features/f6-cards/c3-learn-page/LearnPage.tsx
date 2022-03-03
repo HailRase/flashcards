@@ -5,11 +5,10 @@ import {Navigate, useParams} from "react-router-dom";
 import {ICard} from "../../../s1-main/m3-dal/card";
 import {StoreType} from "../../../s1-main/m2-bll/store";
 import {fetchCards, gradeCard} from "../../../s1-main/m2-bll/card-reducer";
-import SuperButton from "../../../s1-main/m1-ui/common/c2-SuperButton/SuperButton";
 import {PATH} from "../../../s1-main/m1-ui/routes/routes";
 import {TableSpinner} from "../../f5-packs/p3-packs-table/PacksTable";
 
-const grades = ['не знал', 'забыл', 'долго думал', 'перепутал', 'знал'];
+const grades = [`Don't know`, 'Forgot', 'Long thought', 'Mixed up', 'Know'];
 
 const getCard = (cards: ICard[]) => {
     const sum = cards.reduce((acc, card) => acc + (6 - card.grade) * (6 - card.grade), 0);
@@ -63,9 +62,9 @@ const LearnPage = () => {
         if (cards.length > 0) setCard(getCard(cards));
     }, [dispatch, learnPackId, cards, first]);
 
-    const onNext = () => {
+    const onGradeCard = (grade: number) => {
         setIsChecked(false);
-
+        dispatch(gradeCard(grade + 1, card._id))
         if (cards.length > 0) {
             setCard(getCard(cards));
         }
@@ -94,10 +93,9 @@ const LearnPage = () => {
                             {grades.map((g, i) => (
                                 <button key={'grade-' + i}
                                         className={s.gradeButton}
-                                        onClick={() => dispatch(gradeCard(i + 1, card._id))}>{g}</button>
+                                        onClick={() => onGradeCard(i)}>{g}</button>
                             ))}
                         </div>
-                        <button className={s.cardCommonButton} onClick={onNext}>next</button>
                     </div>
                 )}
 
