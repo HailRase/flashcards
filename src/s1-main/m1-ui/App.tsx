@@ -20,6 +20,8 @@ import Packs from '../../s2-features/f5-packs/Packs';
 import Cards from "../../s2-features/f6-cards/Cards";
 import EditProfile from "../../s2-features/f2-profile/EditProfile";
 import LearnPage from "../../s2-features/f6-cards/c3-learn-page/LearnPage";
+import PackEditor from "../../s2-features/f5-packs/p4-pack-editor/PackEditor";
+import CardEditor from "../../s2-features/f6-cards/c4-card-editor/CardEditor";
 
 const App = () => {
     const initialized = useAppSelector(state => state.app.initialized)
@@ -46,7 +48,9 @@ const App = () => {
                 <Route path={PATH.PASSWORD.RECOVERY} element={<PasswordRecovery/>}/>
                 <Route path={PATH.PASSWORD.CHANGE} element={<ChangePassword/>}/>
                 <Route path={PATH.E404} element={<E404/>}/>
-                <Route path={PATH.EDITPROFILE} element={<EditProfile/>}/>
+                <Route path={PATH.EDIT.PROFILE} element={<EditProfile/>}/>
+                <Route path={PATH.EDIT.PACK} element={<PackEditor/>}/>
+                <Route path={PATH.EDIT.CARD} element={<CardEditor/>}/>
             </Routes>
         </div>
     );

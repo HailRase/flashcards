@@ -18,8 +18,6 @@ const getCard = (cards: ICard[]) => {
             return {sum: newSum, id: newSum < rand ? i : acc.id}
         }
         , {sum: 0, id: -1});
-    console.log('test: ', sum, rand, res)
-
     return cards[res.id + 1];
 }
 
@@ -30,7 +28,6 @@ const LearnPage = () => {
     const {cards, filter, status} = useSelector((state: StoreType) => state.card);
     const isAuth = useSelector<StoreType, boolean>(state => state.auth.isAuth);
     const {learnPackId} = useParams();
-    console.log(learnPackId)
     const [card, setCard] = useState<ICard>({
         _id: 'fake',
         answer: '',
@@ -63,7 +60,7 @@ const LearnPage = () => {
     }, [dispatch, learnPackId, cards, first]);
 
     const onGradeCard = (grade: number) => {
-        setIsChecked(false);
+        setIsChecked(true);
         dispatch(gradeCard(grade + 1, card._id))
         if (cards.length > 0) {
             setCard(getCard(cards));
@@ -73,22 +70,25 @@ const LearnPage = () => {
     return (
         <div className={s.cardContainer}>
             <div className={s.card}>
-                {status === 'loading'
-                    ? <TableSpinner/>
-                    : <div className={s.questionContainer}>
+                <div className={isChecked ? s.flipper : `${s.flipper} ${s.flipperRotate}`}>
+                    <div className={s.questionContainer}>
                         <div className={s.question}>
                             <span className={s.questionTitle}>Question: </span>
                             <span className={s.questionBody}>{card.question}</span>
                         </div>
-                        {!isChecked && <button className={s.cardCommonButton}
-                                               onClick={() => setIsChecked(true)}>Check</button>}
-                    </div>}
-                {isChecked && (
+                        {card.questionImg && <img src={card.questionImg} alt="" className={s.cardImage}/>}
+                        <button className={s.cardCommonButton}
+                                onClick={() => setIsChecked(!isChecked)}>Check
+                        </button>
+                    </div>
                     <div className={s.answerContainer}>
-                        <div className={s.answer}>
-                            <span className={s.questionTitle}>Answer: </span>
-                            <span className={s.questionBody}>{card.answer}</span>
-                        </div>
+                        {
+                            <div className={s.answer}>
+                                <span className={s.questionTitle}>Answer: </span>
+                                <span className={s.questionBody}>{card.answer}</span>
+                                {isChecked && <div className={s.blur}></div>}
+                            </div>}
+                        {card.answerImg && <img src={card.answerImg} alt="" className={s.cardImage}/>}
                         <div className={s.grades}>
                             {grades.map((g, i) => (
                                 <button key={'grade-' + i}
@@ -97,7 +97,7 @@ const LearnPage = () => {
                             ))}
                         </div>
                     </div>
-                )}
+                </div>
 
             </div>
         </div>

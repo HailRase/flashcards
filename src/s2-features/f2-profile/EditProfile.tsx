@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { editAuthUserData } from '../../s1-main/m2-bll/auth-reducer';
-import { StoreType } from '../../s1-main/m2-bll/store';
+import React, {useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
+import {editAuthUserData} from '../../s1-main/m2-bll/auth-reducer';
+import {StoreType} from '../../s1-main/m2-bll/store';
 import s from './EditProfile.module.css'
 
 
@@ -17,7 +17,6 @@ const EditProfile = () => {
     const dispatch = useDispatch();
 
     const cancelChangeProfileHandler = () => {
-
         navigate("/profile")
     }
 
@@ -27,21 +26,31 @@ const EditProfile = () => {
     const editProfileHandler = () => {
         dispatch(editAuthUserData(name, avatar))
     }
-    
+
     return (
-        <div className={s.container}>
+        <div className={s.editProfileContainer}>
+            <div className={s.editProfile}>
                 <h2>Personal information</h2>
-                <img src={userAvatar} />
-                <div>
-                    <span>Nickname</span>
-                    <input onChange={(e) => { setName(e.currentTarget.value) }} value={name}></input>
+                <img src={userAvatar}/>
+                <div className={s.groupInput}>
+                    <div>
+                        <span>Nickname</span>
+                        <input onChange={(e) => {
+                            setName(e.currentTarget.value)
+                        }} value={name}/>
+                    </div>
+                    <div>
+                        <span>AvatarURL</span>
+                        <input onChange={(e) => {
+                            setAvatar(e.currentTarget.value)
+                        }} value={avatar}/>
+                    </div>
                 </div>
-                <div>
-                    <span>AvatarURL</span>
-                    <input onChange={(e) => { setAvatar(e.currentTarget.value) }} value={avatar} ></input>
+                <div className={s.groupButton}>
+                    <button onClick={cancelChangeProfileHandler} disabled={isDisabled}>Cancel</button>
+                    <button onClick={editProfileHandler} disabled={isDisabled}>Save</button>
                 </div>
-                <button onClick={cancelChangeProfileHandler} disabled={isDisabled} >Cancel</button>
-                <button onClick={editProfileHandler} disabled={isDisabled} >Save</button>
+            </div>
         </div>
     )
 };

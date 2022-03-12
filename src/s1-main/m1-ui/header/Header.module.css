@@ -1,4 +1,4 @@
-.headerNavigatorContainer{
+.headerNavigatorContainer {
     width: 100%;
     background: #EBE0E9;
     display: flex;
@@ -12,29 +12,18 @@
     height: 9vh;
     width: 70%;
 }
-
-.headerNavigatorLeft {
+.headerNavigatorPosition {
     height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
-.headerNavigatorRight {
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-
 .navLinks {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 100%;
 }
-
 .navLink {
     display: flex;
     justify-content: center;
@@ -45,21 +34,24 @@
     font-size: 16px;
     color: black;
     height: 100%;
+    width: 100%;
     padding: 0 20px 0 20px;
     border: none;
     background: none;
     cursor: pointer;
 }
+
 .navLink:hover {
     background: #DCCCDB;
 }
+
 .logo {
-    font-family: Poppins;
     display: block;
     font-size: 26px;
     font-weight: 600;
     color: black;
 }
+
 .active {
     background-color: #DCCCDB;
     border-bottom: 3px solid #21268f;
@@ -67,5 +59,84 @@
 .image {
     height: 40%;
     width: 40%;
-    margin-right: 5px;
+    margin-left: 10px;
+}
+.sideBarButton{
+    display: none;
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    border-radius: 15px;
+    right: 15px;
+    top: 10px;
+    padding: 5px;
+    color:black;
+    font-size: 18px;
+    cursor: pointer;
+}
+.sideBarButton img{
+    width: 100%;
+    height: 100%;
+    transition: 0.5s;
+}
+.sideBarButton:hover{
+    background-color: #c9bbc8;
+}
+.sideBarButton:active{
+    opacity: 0.6;
+}
+.sideBarButton:hover img{
+    transform: rotate(90deg);
+}
+
+
+
+/* -------------Media query---------------------*/
+@media screen and (max-width: 510px) {
+    .headerNavigatorContainer {
+        position: fixed;
+        z-index: 31;
+    }
+    .headerNavigator {
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+    }
+    .headerNavigatorPosition{
+        width: 100%;
+    }
+    .navLinks{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+    }
+    .navLink {
+        z-index: 31;
+        width: 90%;
+        justify-content: flex-start;
+        padding: 5px 20px;
+        border-top: 1px solid #938c8c;
+    }
+
+    .image {
+        width: 10%;
+    }
+    .logo {
+        z-index: 31;
+    }
+    .sideBarButton{
+        display: block;
+        z-index: 31;
+    }
+
+    .backBlurBlock{
+        position: fixed;
+        width: 100vh;
+        height: 100vh;
+        -webkit-backdrop-filter: blur(25px);
+        backdrop-filter: blur(25px);
+        z-index: 30;
+    }
 }

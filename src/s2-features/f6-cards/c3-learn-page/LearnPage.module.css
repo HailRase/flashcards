@@ -4,57 +4,77 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
 }
 .card {
-    min-height: 15%;
-    width: 40%;
-    background-color: white;
-    border-radius: 5px;
+    height: 80%;
+    width: 50%;
+    -webkit-perspective: 1200px;
+    perspective: 1200px;
+    -moz-transform: perspective(1200px);
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 15px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
-.questionContainer {
+.flipper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    min-width: 50%;
+    min-height: 70%;
+    transform-style: preserve-3d;
+    transition: .7s linear;
+}
+.flipper.flipperRotate {
+    transform: rotateX(180deg);
+}
+.questionContainer, .answerContainer {
+    position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
-    width: 100%;
+    justify-content: space-around;
+    min-width: 100%;
+    min-height: 100%;
+    background-color: white;
+    backface-visibility: hidden;
+    border-radius: 10px;
+}
+.questionContainer {
+    z-index: 2;
+    transform: rotateX(0deg);
+}
+.answerContainer {
+    transform: rotateX(-180deg);
 }
 .question {
     display: flex;
-    flex-wrap: wrap;
     width: 100%;
     margin-bottom: 10px;
 }
 .questionTitle {
-    font-size: 20px;
+    display: block;
+    font-size: 1.4rem;
     font-weight: 600;
 }
 .questionBody{
-    font-size: 16px;
+    display: block;
+    font-size: 1rem;
     font-weight: 500;
-
 }
 span {
     display: inline-block;
     margin: 10px;
 }
-.answerContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-top: 10px;
-    width: 100%;
-}
+
 .answer {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
     width: 100%;
     margin-bottom: 10px;
 }
@@ -94,7 +114,42 @@ span {
 }
 .cardCommonButton:active {
     opacity: 0.7;
+
+}
+.cardCommonButton:active ~ .card{
+    transform: rotateX(180deg);
 }
 .cardCommonButton:hover {
     box-shadow: 0 0 5px rgba(0,0,0,0.8);
+}
+.cardImage {
+    width: 50%;
+    margin-bottom: 10px;
+}
+.blur{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backdrop-filter: blur(25px);
+    backdrop-filter: blur(25px);
+}
+
+@media screen and (max-width: 510px) {
+    .cardContainer{
+        height: 100vh;
+    }
+    .card{
+        width: 100%;
+    }
+    .flipper{
+        min-width: 100%;
+    }
+}
+@media screen and (max-width: 810px) {
+    .card{
+        width: 50%;
+    }
+    .flipper{
+        min-width: 100%;
+    }
 }

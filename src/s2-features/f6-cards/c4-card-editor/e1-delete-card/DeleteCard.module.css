@@ -1,0 +1,23 @@
+.deleteCard {
+    display: block;
+    font-size: 16px;
+    font-family: inherit;
+    font-weight: 400;
+    width: 40vh;
+}
+.deleteButton {
+    margin-top: 10px;
+    border: none;
+    padding: 5px 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: red;
+    color: white;
+}
+.deleteButton:active {
+    opacity: 0.6;
+}
+.deleteButton:hover {
+    box-shadow: 0 0 5px rgba(0,0,0,0.8);
+}

@@ -3,12 +3,20 @@
     padding: 0;
 }
 
-.container {
-    position: absolute;
-    width: 400px;
-    height: 500px;
-    left: 434px;
-    top: 84px;
+.editProfileContainer {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.editProfile {
+    padding: 10px;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
     background-color: #F9F9FE;
     border-radius: 15px;
 }
@@ -62,4 +70,15 @@
 
 .container button:hover {
     background-color: #e1e0e7e7;
+}
+.groupButton {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+.groupInput {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
