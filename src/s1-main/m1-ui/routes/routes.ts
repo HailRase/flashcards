@@ -5,7 +5,11 @@ export const PATH = {
         REGISTER: '/register'
     },
     PROFILE: '/profile',
-    EDITPROFILE: '/edit',
+    EDIT: {
+        PROFILE: '/edit/profile',
+        PACK: '/edit/pack/:packId',
+        CARD: '/edit/card/:cardId'
+    },
     PASSWORD: {
         RECOVERY: '/recovery',
         CHANGE: '/change/:resetPasswordToken'

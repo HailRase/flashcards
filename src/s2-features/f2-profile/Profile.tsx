@@ -1,27 +1,21 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {StoreType, useAppSelector} from "../../s1-main/m2-bll/store";
 import searchIcon from "../../assets/search_icon.png";
 
 import s from './Profile.module.css'
 import PacksTable from '../f5-packs/p3-packs-table/PacksTable';
 import {useDispatch, useSelector} from 'react-redux';
-import {
-    fetchPacks,
-    PackFilter,
-    PackState,
-    PackStatus
-} from '../../s1-main/m2-bll/pack-reducer';
+import {fetchPacks, PackState} from '../../s1-main/m2-bll/pack-reducer';
 import Pagination from '../../s1-main/m1-ui/common/c4-Pagination/Pagination';
 import {Navigate, useNavigate} from 'react-router-dom';
-import DoubleRange, {
-    RangeValue
-} from "../../s1-main/m1-ui/common/DoubleRange/DoubleRange";
+import DoubleRange from "../../s1-main/m1-ui/common/DoubleRange/DoubleRange";
 import usePackRange from "../../s3-utils/usePackRange";
 import {PATH} from "../../s1-main/m1-ui/routes/routes";
 
 const Profile = () => {
 
     useEffect(() => {
+        if(isAuth)
         dispatch(fetchPacks({...filter, user_id: id, page: 1}));
     }, [])
 
@@ -37,7 +31,7 @@ const Profile = () => {
         dispatch(fetchPacks({...filter, page}))
     }
 
-    if (!isAuth) return <Navigate replace to={PATH.AUTH.LOGIN}/>
+    if (!isAuth) return <Navigate to={PATH.AUTH.LOGIN}/>
 
     return <div className={s.profileContainer}>
         <div className={s.profile}>
@@ -71,7 +65,7 @@ const ProfileSidebar = () => {
 
 
     const changeProfileHandler = () => {
-        navigate("/edit")
+        navigate("/edit/profile")
     }
 
     return (

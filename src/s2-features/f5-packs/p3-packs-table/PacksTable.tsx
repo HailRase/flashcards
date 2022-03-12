@@ -12,6 +12,7 @@ import {useNavigate} from "react-router-dom";
 import {setCardStatus} from "../../../s1-main/m2-bll/card-reducer";
 import {formatStr} from "../../../s3-utils/formatStrt";
 import PopUp from "../../../s1-main/m1-ui/common/c5-PopUp/PopUp";
+import DeletePack from "../p4-pack-editor/e1-delete-pack/DeletePack";
 
 const EmptyRow = (i: number) => {
     return <div key={i} className={`${s.row} ${i % 2 && s.dark}`}>
@@ -106,11 +107,7 @@ const PacksTable: FC = () => {
         {Rows}
         {EmptyRows}
         {popupVisible && <PopUp active={popupVisible} setActive={setPopupVisible} title={'Delete pack'}>
-            <span className={s.deletePack}>
-                Do you really want to <b>remove {pack.packName}</b>?
-                All cards will be excluded from this course.
-            </span>
-            <button onClick={() => onDeletePackHandler(pack.packId)} className={s.deleteButton}>Delete</button>
+            <DeletePack packId={pack.packId} packName={pack.packName} deletePack={onDeletePackHandler}/>
         </PopUp>}
     </div>
 }

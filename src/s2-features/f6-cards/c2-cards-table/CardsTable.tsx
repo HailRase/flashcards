@@ -1,29 +1,45 @@
-import React, {MouseEvent, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {StoreType} from "../../../s1-main/m2-bll/store";
-import {CardState, deleteCard, fetchCards} from "../../../s1-main/m2-bll/card-reducer";
+import {CardState, deleteCard, fetchCards, setCardStatus} from "../../../s1-main/m2-bll/card-reducer";
 import s from './CardsTable.module.css'
 import CardsTableHeader from "./t1-cards-table-header/CardsTableHeader";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {TableSpinner} from "../../f5-packs/p3-packs-table/PacksTable";
 import deleteIcon from "../../../assets/delete_icon.svg";
 import editIcon from "../../../assets/edit_icon.svg";
 import {formatStr} from "../../../s3-utils/formatStrt";
 import eyeIcon from "../../../assets/eye_icon.svg";
+import PopUp from "../../../s1-main/m1-ui/common/c5-PopUp/PopUp";
+import DeleteCard from "../c4-card-editor/e1-delete-card/DeleteCard";
 
 const CardsTable = () => {
-
-    const {status, filter, cardsTotal, cards} = useSelector<StoreType, CardState>(state => state.card);
+    const [popupVisible, setPopupVisible] = useState<boolean>(false)
+    const [card, setCard] = useState({
+        cardId: '',
+        cardName: ''
+    })
+    const {status, filter, cards} = useSelector<StoreType, CardState>(state => state.card);
     const id = useSelector<StoreType, string | undefined>(state => state.auth.userData?._id) || "";
+    const navigate = useNavigate()
     const params = useParams()
     const dispatch = useDispatch()
     useEffect(() => {
         if (params.packCardsId && status === "init") {
             dispatch(fetchCards({...filter, cardsPack_id: params.packCardsId}));
         }
-    }, [])
-    const deleteCardHandler = (e: MouseEvent<HTMLImageElement>) => {
-        dispatch(deleteCard(e.currentTarget.dataset.id || ""))
+    }, [dispatch, filter, status, params.packCardsId])
+    const onDeleteCardHandler = (cardId: string) => {
+        dispatch(deleteCard(cardId || ""))
+        setPopupVisible(false)
+    }
+    const onDeletePopupHandler = (card: { cardId: string, cardName: string }) => {
+        setPopupVisible(true)
+        setCard(card)
+    }
+    const onCardEditor = (cardId: string) => {
+        navigate(`/edit/card/${cardId}`)
+        dispatch(setCardStatus('init'))
     }
     const loadedCards = status === "loaded" && cards.map((c, i) =>
 
@@ -47,10 +63,10 @@ const CardsTable = () => {
                     <img src={deleteIcon}
                          alt="delete my pack"
                          data-id={c._id}
-                         onClick={deleteCardHandler}
+                         onClick={() =>onDeletePopupHandler({cardId:c._id, cardName: c.question})}
                          className={`${s.icon} ${s.icon_red}`}/>
 
-                    <img src={editIcon} alt="edit my pack" className={`${s.icon} ${s.icon_blue}`}/>
+                    <img onClick={() => onCardEditor(c._id)} src={editIcon} alt="edit my pack" className={`${s.icon} ${s.icon_blue}`}/>
                 </>}
                 <img src={eyeIcon}
                      alt="view cards"
@@ -74,6 +90,9 @@ const CardsTable = () => {
                 <div className={s.cardsTable}>
                     {loadedCards}
                 </div>
+                {popupVisible && <PopUp active={popupVisible} setActive={setPopupVisible} title={'Delete card'}>
+                    <DeleteCard cardId={card.cardId} cardName={card.cardName} deleteCard={onDeleteCardHandler}/>
+                </PopUp>}
             </div>
         </div>
     );

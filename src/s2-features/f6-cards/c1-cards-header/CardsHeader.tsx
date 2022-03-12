@@ -3,7 +3,6 @@ import s from './CardsHeader.module.css'
 import sph from './../../f5-packs/p2-packs-header/packs-header.module.css'
 import searchIcon from "../../../assets/search_icon.png";
 import {useNavigate, useParams} from "react-router-dom";
-import CardEditor from "../c4-card-editor/CardEditor";
 import {StoreType, useAppSelector} from "../../../s1-main/m2-bll/store";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchCards} from "../../../s1-main/m2-bll/card-reducer";
@@ -11,7 +10,7 @@ import {fetchPacks} from "../../../s1-main/m2-bll/pack-reducer";
 
 const CardsHeader = () => {
     const [searchValue, setSearchValue] = useState("");
-    const [modeCardEditor, setModeCardEditor] = useState(false)
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth)
     const params = useParams()
     const dispatch = useDispatch()
     const isAuth = useSelector<StoreType, boolean>(state => state.auth.isAuth);
@@ -22,28 +21,31 @@ const CardsHeader = () => {
 
     const navigate = useNavigate()
     const storedSearchValue = cardsFilter.cardQuestion;
-
-    useEffect(() => {                            //возможно из-за этого запроса умирает кука
+    useEffect(() => {                           //возможно из-за этого запроса умирает кука
         if (packStatus === "init" && isAuth) {
-            dispatch(fetchPacks(packFilter));
+            dispatch(fetchPacks({...packFilter, }));
         }
     }, [dispatch, packFilter, packStatus, isAuth])
-
 
     useEffect(() => {
         if (cardsStatus === "loaded" && storedSearchValue !== searchValue) {
             dispatch(fetchCards({...cardsFilter, cardQuestion: searchValue}));
         }
     }, [dispatch, cardsFilter, cardsStatus, searchValue])
-
+    const changeWidth = () => {
+        setScreenWidth(window.innerWidth)
+    }
+    useEffect(() => {
+        window.addEventListener('resize', changeWidth)
+        return () => {
+            window.removeEventListener('resize', changeWidth)
+        }
+    }, [])
     const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.currentTarget.value);
     }
     const onPacksNavigate = () => {
         navigate('/packs')
-    }
-    const onModeChange = () => {
-        setModeCardEditor(true)
     }
     return (
         <div className={s.headerContainer}>
@@ -51,7 +53,7 @@ const CardsHeader = () => {
                 <div className={s.arrowBack}>
                     <label className={s.back} onClick={onPacksNavigate}>
                         &larr;
-                        {cardsStatus === "loaded" && " " + pack?.name}
+                        {packStatus === "loaded" && pack?.name && " " + pack.name}
                     </label>
                 </div>
                 <div className={s.searchBlock}>
@@ -62,10 +64,12 @@ const CardsHeader = () => {
                                onChange={onSearchChange}
                                placeholder="Search..."/>
                     </div>
-                    {pack?.user_id ===id && <button style={{marginLeft: "15px"}} className={sph.button} onClick={onModeChange}>Add Card</button>}
+                    {pack?.user_id === id && <button style={{marginLeft: "15px"}}
+                                                     className={sph.button}>{screenWidth <= 770 ? "+" : "Add Card"}
+                    </button>
+                    }
                 </div>
             </div>
-            {modeCardEditor && <CardEditor modeCardEditor={modeCardEditor} setModeCardEditor={setModeCardEditor}/>}
         </div>
     );
 };

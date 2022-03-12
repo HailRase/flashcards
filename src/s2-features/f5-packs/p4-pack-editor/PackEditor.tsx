@@ -5,23 +5,17 @@ import {createPack} from "../../../s1-main/m2-bll/pack-reducer";
 import {useDispatch} from "react-redux";
 
 
-type PackEditorPropsType = {
-    modePackEditor: boolean
-    setModePackEditor: (value: boolean) => void
-}
 
-const PackEditor: React.FC<PackEditorPropsType> = ({modePackEditor, setModePackEditor}) => {
+
+const PackEditor = () => {
 
     const [packName, setPackName] = useState("")
     const dispatch = useDispatch()
     const createPackHandler = () => {
         dispatch(createPack(packName));
-        setModePackEditor(false)
         setPackName("")
     }
-    const onChangePackMode = () => {
-        setModePackEditor(false)
-    }
+
     const onChangePackName = (e: ChangeEvent<HTMLInputElement>) => {
         setPackName(e.currentTarget.value)
     }
@@ -41,7 +35,6 @@ const PackEditor: React.FC<PackEditorPropsType> = ({modePackEditor, setModePackE
                     </div>
                     <div className={s.editorFooter}>
                         <button className={sph.button} onClick={createPackHandler}>Add</button>
-                        <button className={sph.button} onClick={onChangePackMode}>Cancel</button>
                     </div>
                 </div>
             </div>

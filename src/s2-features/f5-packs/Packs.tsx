@@ -28,7 +28,7 @@ const Packs: FC = () => {
         dispatch(fetchPacks({...filter, page}))
     }
 
-    if (!isAuth) return <Navigate replace to={PATH.AUTH.LOGIN}/>
+    if (!isAuth) return <Navigate to={PATH.AUTH.LOGIN}/>
 
     return <div className={s.packsContainer}>
         <div className={s.packs}>

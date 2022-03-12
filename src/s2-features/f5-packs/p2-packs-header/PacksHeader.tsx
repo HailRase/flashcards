@@ -9,7 +9,6 @@ import PackEditor from "../p4-pack-editor/PackEditor";
 
 const PacksHeader: FC = () => {
     const [searchValue, setSearchValue] = useState("");
-    const [modePackEditor, setModePackEditor] = useState(false)
     const {status, filter} = useSelector<StoreType, PackState>(state => state.pack);
     const dispatch = useDispatch();
 
@@ -24,9 +23,6 @@ const PacksHeader: FC = () => {
     const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.currentTarget.value);
     }
-    const onChangePackMode = () => {
-        setModePackEditor(true)
-    }
 
     return <div className={s.header}>
         <h2 className={s.title}>Packs List</h2>
@@ -36,9 +32,8 @@ const PacksHeader: FC = () => {
                 <input className={s.input} type="text" value={searchValue} onChange={onSearchChange} name="search"
                        placeholder="Search..."/>
             </div>
-            <button className={s.button} onClick={onChangePackMode}>Add New Pack</button>
+            <button className={s.button} >Add new pack</button>
         </div>
-        {modePackEditor && <PackEditor modePackEditor={modePackEditor} setModePackEditor={setModePackEditor}/>}
     </div>
 }
 

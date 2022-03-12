@@ -18,7 +18,7 @@
 }
 
 .search_container {
-    width: 425px;
+    width: 100%;
     background: #ECECF9;
     border: 1px solid #635D80;
     border-radius: 2px;
@@ -32,26 +32,23 @@
     background: none;
     border: none;
     outline: none;
-    width: 100%;
+    width: auto;
 }
 
 .button {
-    padding: 8px 40px;
     background: #21268f;
-    box-shadow: 0px 4px 18px rgba(33, 38, 143, 0.35),
-    inset 0px 1px 0px rgba(255, 255, 255, 0.3);
     border-radius: 30px;
     border: none;
-    outline: none;
     color: #ececf9;
     font-weight: 500;
     font-size: 16px;
-    line-height: 19px;
-    text-align: center;
-    letter-spacing: 0.01em;
     cursor: pointer;
-    width: 190px;
+    padding: 10px 10px;
+    width: 15%;
 }
 .button:active {
     opacity: 0.8;
+}
+@media screen and (max-width: 510px){
+
 }

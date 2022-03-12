@@ -29,12 +29,10 @@ export const cardAPI = {
             params,
         });
     },
-
     createCard(params: CreateCardParams) {
         const body = {card: params};
         return instance.post<CreateCardResponse>(ENDPOINT, body);
     },
-
     updateCard(params: UpdateCardParams) {
         const body = {card: params};
         return instance.put<UpdateCardResponse>(ENDPOINT, body);
@@ -94,13 +92,11 @@ interface CreateCardParams {
     questionVideo?: string;
     answerVideo?: string;
 }
-
 interface CreateCardResponse extends Response {
     newCard: ICard;
 }
-
 // updateCard Types
-interface UpdateCardParams extends Partial<Omit<ICard, "_id">> {
+export interface UpdateCardParams extends Partial<Omit<ICard, "_id">> {
     _id: string;
 }
 

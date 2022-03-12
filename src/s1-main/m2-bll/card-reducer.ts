@@ -1,6 +1,8 @@
-import {cardAPI, GetCardsParams, ICard} from "../m3-dal/card";
+import {cardAPI, GetCardsParams, ICard, UpdateCardParams} from "../m3-dal/card";
 import {ThunkAction} from "redux-thunk";
 import {StoreType} from "./store";
+import {fileAPI} from "../m3-dal/file";
+import {getAuthUserData} from "./auth-reducer";
 
 // Actions
 export const setCards = (cards: ICard[]) => {
@@ -45,7 +47,8 @@ export const setCardFilter = (filter: CardFilter) => {
         filter,
     } as const;
 }
-type SetCardGrade = ReturnType<typeof setCardGrade>
+type SetCardFilter = ReturnType<typeof setCardFilter>;
+
 export const setCardGrade = (grade: number, card_id: string) => {
     return {
         type: "CARD/SET_GRADE",
@@ -53,15 +56,23 @@ export const setCardGrade = (grade: number, card_id: string) => {
         card_id
     } as const;
 }
+type SetCardGrade = ReturnType<typeof setCardGrade>
 
-type SetCardFilter = ReturnType<typeof setCardFilter>;
+export const setCardQuestionPhoto = (photoFile: {myFile: string}) => {
+    return {
+        type: "CARD/SET_PHOTO",
+        photoFile
+    } as const;
+}
+type SetCardQuestionPhoto = ReturnType<typeof setCardQuestionPhoto>
 
 export type CardAction =
     | SetCards
     | SetCardStatus
     | SetCardError
     | SetCardFilter
-    | SetCardsTotalCount;
+    | SetCardsTotalCount
+    | SetCardQuestionPhoto
 
 // Thunks
 export const fetchCards = (
@@ -70,10 +81,6 @@ export const fetchCards = (
     return async (dispatch) => {
         dispatch(setCardStatus("loading"));
         dispatch(setCardFilter(filter));
-        console.log(filter.cardsPack_id)
-
-        if (!filter.cardsPack_id?.length) return;
-
         try {
             const {cards, cardsTotalCount} = (
                 await cardAPI.getCards(filter)
@@ -81,7 +88,8 @@ export const fetchCards = (
             dispatch(setCardsTotalCount(cardsTotalCount));
             dispatch(setCards(cards));
             dispatch(setCardStatus("loaded"));
-        } catch {
+        } catch (error){
+            console.log(error)
             dispatch(setCardError("Couldn't Fetch Cards"));
         }
     };
@@ -114,7 +122,23 @@ export const deleteCard = (id: string): CardThunkAction => {
             dispatch(setCards(cards));
             dispatch(setCardStatus("loaded"));
         } catch {
-            dispatch(setCardError("Could not Delete Pack"));
+            dispatch(setCardError("Couldn't delete card"));
+        }
+    }
+}
+export const updateCard = (params: UpdateCardParams): CardThunkAction => {
+    return async (dispatch, getState) => {
+        dispatch(setCardStatus("loading"));
+        try {
+            await cardAPI.updateCard(params);
+            const {cards, cardsTotalCount} = (
+                await cardAPI.getCards(getState().card.filter)
+            ).data;
+            dispatch(setCardsTotalCount(cardsTotalCount));
+            dispatch(setCards(cards));
+            dispatch(setCardStatus("loaded"));
+        } catch {
+            dispatch(setCardError("Couldn't update card"));
         }
     }
 }
@@ -127,6 +151,18 @@ export const gradeCard = (grade: number, card_id: string): CardThunkAction => {
             dispatch(setCardStatus("loaded"));
         } catch {
             dispatch(setCardError("Couldn't grade card"));
+        }
+    }
+}
+export const savePhoto = (photoFile: {myFile: File}): CardThunkAction => {
+    return async (dispatch) => {
+        dispatch(setCardStatus("loading"));
+        try {
+            await fileAPI.postFile(photoFile);
+            dispatch(setCardStatus("loaded"));
+        } catch {
+            dispatch(setCardError("Couldn't save photo"));
+            console.log("error")
         }
     }
 }
@@ -166,15 +202,12 @@ export const cardReducer = (state = initialState, action: CardAction): any => {
         case "CARD/SET_CARDS": {
             return {...state, cards: action.cards};
         }
-
         case "CARD/SET_CARDS_TOTAL": {
             return {...state, cardsTotal: action.cardsTotal};
         }
-
         case "CARD/SET_STATUS": {
             return {...state, status: action.status};
         }
-
         case "CARD/SET_ERROR": {
             return {
                 ...state,
@@ -182,14 +215,18 @@ export const cardReducer = (state = initialState, action: CardAction): any => {
                 errorMessage: action.errorMessage,
             };
         }
-
         case "CARD/SET_FILTER": {
             return {
                 ...state,
                 filter: action.filter,
             };
         }
-
+        case "CARD/SET_PHOTO": {
+            return {
+                ...state,
+                questionImg: action.photoFile,
+            };
+        }
         default:
             return state;
     }
