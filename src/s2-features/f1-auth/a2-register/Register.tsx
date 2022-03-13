@@ -3,13 +3,14 @@ import SuperButton from '../../../s1-main/m1-ui/common/c2-SuperButton/SuperButto
 import s from './Register.module.css'
 import {useDispatch} from "react-redux";
 import {register} from "../../../s1-main/m2-bll/auth-reducer";
+import {useNavigate} from "react-router-dom";
 
 const Register = () => {
 
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [repeatPassword, setRepeatPassword] = useState<string>("")
-
+    const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const onChaneEmailHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +25,7 @@ const Register = () => {
     const onClickSendRegistrationData = () => {
         dispatch(register(email, password, repeatPassword))
     }
-
+    const onNavigateToLoginHandler = () => navigate('/login')
     return (
         <div className={s.registerFormWrapper}>
             <div className={s.registerFormContainer}>
@@ -50,7 +51,10 @@ const Register = () => {
                         <label className={s.fieldTitle}>Confirm password</label>
                     </div>
                 </div>
-                <button className={s.registerButton} onClick={onClickSendRegistrationData}>Register</button>
+                <div className={s.groupRegisterButton}>
+                    <button className={s.registerButton} onClick={onNavigateToLoginHandler}>Back</button>
+                    <button className={s.registerButton} onClick={onClickSendRegistrationData}>Register</button>
+                </div>
             </div>
         </div>
     );

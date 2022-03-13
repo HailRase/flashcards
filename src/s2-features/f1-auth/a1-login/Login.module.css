@@ -127,7 +127,7 @@
 @media screen and (max-width: 510px){
     .loginFormContainer{
         min-height:  60vh;
-        min-width: 80vw;
+        max-width: 70vw;
     }
 }
 @media screen and (max-width: 820px){
