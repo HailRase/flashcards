@@ -1,5 +1,4 @@
 import React, {ChangeEvent, useState} from 'react';
-import SuperInputText from "../../../s1-main/m1-ui/common/c1-SuperInputText/SuperInputText";
 import SuperButton from '../../../s1-main/m1-ui/common/c2-SuperButton/SuperButton';
 import s from './Register.module.css'
 import {useDispatch} from "react-redux";
@@ -16,7 +15,7 @@ const Register = () => {
     const onChaneEmailHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setEmail(e.currentTarget.value)
     }
-    const onChanePasswordHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const onChangePasswordHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setPassword(e.currentTarget.value)
     }
     const onChaneRepeatPasswordHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -29,20 +28,29 @@ const Register = () => {
     return (
         <div className={s.registerFormWrapper}>
             <div className={s.registerFormContainer}>
-                <h2>Registration</h2>
-                <div>
-                    <div><b>Email: </b></div>
-                    <SuperInputText onChange={onChaneEmailHandler}/>
+                <span className={s.registerTitle} style={{fontSize: '24px'}}>Flashcards</span>
+                <span className={s.registerTitle}>Sign Up</span>
+                <div className={s.registerFields}>
+                    <div className={s.registerField}>
+                        <input className={s.fieldInput}
+                               onChange={onChaneEmailHandler}
+                               placeholder={' '}/>
+                        <label className={s.fieldTitle}>Email</label>
+                    </div>
+                    <div className={s.registerField}>
+                        <input className={s.fieldInput}
+                               onChange={onChangePasswordHandler}
+                               placeholder={' '}/>
+                        <label className={s.fieldTitle}>Password</label>
+                    </div>
+                    <div className={s.registerField}>
+                        <input className={s.fieldInput}
+                               onChange={onChaneRepeatPasswordHandler}
+                               placeholder={' '}/>
+                        <label className={s.fieldTitle}>Confirm password</label>
+                    </div>
                 </div>
-                <div>
-                    <div><b>Password: </b></div>
-                    <SuperInputText type={"password"} onChange={onChanePasswordHandler}/>
-                </div>
-                <div>
-                    <div><b>Repeat password: </b></div>
-                    <SuperInputText type={"password"} onChange={onChaneRepeatPasswordHandler}/>
-                </div>
-                <SuperButton onClick={onClickSendRegistrationData}>OK</SuperButton>
+                <button className={s.registerButton} onClick={onClickSendRegistrationData}>Register</button>
             </div>
         </div>
     );

@@ -25,6 +25,7 @@ import CardEditor from "../../s2-features/f6-cards/c4-card-editor/CardEditor";
 
 const App = () => {
     const initialized = useAppSelector(state => state.app.initialized)
+    const isAuth = useAppSelector(state => state.auth.isAuth)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(initializeApp())
@@ -35,7 +36,7 @@ const App = () => {
     }
     return (
         <div className="App">
-            <Header/>
+            {isAuth && <Header/>}
             <Routes>
                 <Route path='/' element={<Navigate to={PATH.PROFILE}/>}/>
                 <Route path={PATH.TEST} element={<Test/>}/>
