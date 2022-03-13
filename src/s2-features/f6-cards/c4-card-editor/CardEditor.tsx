@@ -75,7 +75,7 @@ const CardEditor = () => {
                     ? <TableSpinner/>
                     : <div className={s.editorFields}>
                         <div className={s.editorField}>
-                            <img src={questionImg} alt={'file'} width={'270'} className={s.cardImage}/>
+                            {questionImg && <img src={questionImg} alt={'file'} width={'270'} className={s.cardImage}/>}
                             <label className={s.fieldFile}>
                                 <input type="file"
                                        accept=".jpg, .jpeg, .png"
@@ -92,7 +92,7 @@ const CardEditor = () => {
                         </div>
 
                         <div className={s.editorField}>
-                            <img src={answerImg} alt={'file'} width={'270'} className={s.cardImage}/>
+                            {answerImg && <img src={answerImg} alt={'file'} width={'270'} className={s.cardImage}/>}
                             <label className={s.fieldFile}>
                                 <input type="file"
                                        accept=".jpg, .jpeg, .png"

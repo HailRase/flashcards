@@ -6,7 +6,6 @@ import {ICard} from "../../../s1-main/m3-dal/card";
 import {StoreType} from "../../../s1-main/m2-bll/store";
 import {fetchCards, gradeCard} from "../../../s1-main/m2-bll/card-reducer";
 import {PATH} from "../../../s1-main/m1-ui/routes/routes";
-import {TableSpinner} from "../../f5-packs/p3-packs-table/PacksTable";
 
 const grades = [`Don't know`, 'Forgot', 'Long thought', 'Mixed up', 'Know'];
 
