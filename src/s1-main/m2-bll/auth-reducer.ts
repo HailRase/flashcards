@@ -1,5 +1,5 @@
-import {authAPI} from "../m3-dal/api";
-import {Dispatch} from "redux";
+import { authAPI } from "../m3-dal/api";
+import { Dispatch } from "redux";
 
 
 const SET_USER_DATA = "SET-USER-DATA"
@@ -33,22 +33,22 @@ export const initialState: InitialStateType = {
 export const authReducer = (state: AuthType = initialState, action: ActionAuthType): typeof initialState => {
     switch (action.type) {
         case "Login/SET-IS-LOGGED-IN":
-            return {...state, isAuth: action.value};
+            return { ...state, isAuth: action.value };
         case SET_USER_DATA: {
-            return {...state, userData: action.userData}
+            return { ...state, userData: action.userData }
         }
         default:
             return state
     }
 }
 export const setUserDataAC = (userData: userDataType
-    ) => {
-        return {
-            type: SET_USER_DATA,
-            userData
-        } as const;
-    }
-;
+) => {
+    return {
+        type: SET_USER_DATA,
+        userData
+    } as const;
+}
+    ;
 export const setIsLoggedInAc = (value: boolean) => {
     return {
         type: "Login/SET-IS-LOGGED-IN", value
